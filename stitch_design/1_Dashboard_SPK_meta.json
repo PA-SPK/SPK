@@ -1,0 +1,25 @@
+{
+  "content": [
+    {
+      "text": "{\"name\":\"projects/10562399908740465786/screens/ce6153cd692b4a52924778b8011de67a\",\"title\":\"Dashboard SPK - High Fidelity\",\"screenshot\":{\"name\":\"projects/10562399908740465786/screens/ce6153cd692b4a52924778b8011de67a/fileEntries/screenshot\",\"downloadUrl\":\"https://stitch.googleapis.com/v1/projects/10562399908740465786/files/screenshot_00065f088f4d3ec10925d4f78434b7f4:download\",\"mimeType\":\"image/png\"},\"htmlCode\":{\"name\":\"projects/10562399908740465786/screens/ce6153cd692b4a52924778b8011de67a/fileEntries/html\",\"downloadUrl\":\"https://stitch.googleapis.com/v1/projects/10562399908740465786/files/ce6153cd692b4a52924778b8011de67a:download\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"2224\",\"deviceType\":\"DESKTOP\"}",
+      "type": "text"
+    }
+  ],
+  "structuredContent": {
+    "deviceType": "DESKTOP",
+    "height": "2224",
+    "htmlCode": {
+      "downloadUrl": "https://stitch.googleapis.com/v1/projects/10562399908740465786/files/ce6153cd692b4a52924778b8011de67a:download",
+      "mimeType": "text/html",
+      "name": "projects/10562399908740465786/screens/ce6153cd692b4a52924778b8011de67a/fileEntries/html"
+    },
+    "name": "projects/10562399908740465786/screens/ce6153cd692b4a52924778b8011de67a",
+    "screenshot": {
+      "downloadUrl": "https://stitch.googleapis.com/v1/projects/10562399908740465786/files/screenshot_00065f088f4d3ec10925d4f78434b7f4:download",
+      "mimeType": "image/png",
+      "name": "projects/10562399908740465786/screens/ce6153cd692b4a52924778b8011de67a/fileEntries/screenshot"
+    },
+    "title": "Dashboard SPK - High Fidelity",
+    "width": "2560"
+  }
+}

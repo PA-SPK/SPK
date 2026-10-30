@@ -1,0 +1,25 @@
+{
+  "content": [
+    {
+      "text": "{\"name\":\"projects/10562399908740465786/screens/bae665295e3246679274d515711bcebb\",\"title\":\"Hasil dan Keputusan - High Fidelity\",\"screenshot\":{\"name\":\"projects/10562399908740465786/screens/bae665295e3246679274d515711bcebb/fileEntries/screenshot\",\"downloadUrl\":\"https://stitch.googleapis.com/v1/projects/10562399908740465786/files/screenshot_00065f0890aba0f00934f3c8743cda49:download\",\"mimeType\":\"image/png\"},\"htmlCode\":{\"name\":\"projects/10562399908740465786/screens/bae665295e3246679274d515711bcebb/fileEntries/html\",\"downloadUrl\":\"https://stitch.googleapis.com/v1/projects/10562399908740465786/files/bae665295e3246679274d515711bcebb:download\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"4390\",\"deviceType\":\"DESKTOP\"}",
+      "type": "text"
+    }
+  ],
+  "structuredContent": {
+    "deviceType": "DESKTOP",
+    "height": "4390",
+    "htmlCode": {
+      "downloadUrl": "https://stitch.googleapis.com/v1/projects/10562399908740465786/files/bae665295e3246679274d515711bcebb:download",
+      "mimeType": "text/html",
+      "name": "projects/10562399908740465786/screens/bae665295e3246679274d515711bcebb/fileEntries/html"
+    },
+    "name": "projects/10562399908740465786/screens/bae665295e3246679274d515711bcebb",
+    "screenshot": {
+      "downloadUrl": "https://stitch.googleapis.com/v1/projects/10562399908740465786/files/screenshot_00065f0890aba0f00934f3c8743cda49:download",
+      "mimeType": "image/png",
+      "name": "projects/10562399908740465786/screens/bae665295e3246679274d515711bcebb/fileEntries/screenshot"
+    },
+    "title": "Hasil dan Keputusan - High Fidelity",
+    "width": "2560"
+  }
+}

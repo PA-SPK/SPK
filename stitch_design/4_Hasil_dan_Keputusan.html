@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"surface-variant":"#dae2fd","outline-variant":"#bccac0","primary-fixed-dim":"#68dba9","surface-tint":"#006c4a","on-tertiary-container":"#fffbff","error-container":"#ffdad6","tertiary-container":"#a36700","on-surface":"#131b2e","tertiary-fixed":"#ffddb8","on-error-container":"#93000a","inverse-primary":"#68dba9","on-surface-variant":"#3d4a42","surface-container-lowest":"#ffffff","on-background":"#131b2e","surface-bright":"#faf8ff","on-tertiary-fixed":"#2a1700","primary-fixed":"#85f8c4","on-tertiary":"#ffffff","surface-container":"#eaedff","on-primary-fixed":"#002114","on-secondary-fixed":"#00174b","on-primary":"#ffffff","surface":"#faf8ff","primary":"#006948","secondary-fixed-dim":"#b4c5ff","background":"#faf8ff","on-primary-container":"#f5fff7","secondary":"#0051d5","on-secondary-fixed-variant":"#003ea8","tertiary":"#825100","secondary-container":"#316bf3","inverse-surface":"#283044","on-error":"#ffffff","surface-container-highest":"#dae2fd","on-primary-fixed-variant":"#005137","surface-container-high":"#e2e7ff","surface-container-low":"#f2f3ff","on-secondary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#653e00","inverse-on-surface":"#eef0ff","tertiary-fixed-dim":"#ffb95f","surface-dim":"#d2d9f4","outline":"#6d7a72","primary-container":"#00855d","on-secondary-container":"#fefcff","secondary-fixed":"#dbe1ff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-sm":"0.625rem","space-md":"1rem","margin":"2rem","gutter":"1.25rem","space-lg":"1.5rem","space-xl":"2rem","space-xs":"0.375rem"},"fontFamily":{"label-sm":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"numeric-metric":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["11px",{"lineHeight":"14px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"headline-xl-mobile":["26px",{"lineHeight":"32px","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-xl":["32px",{"lineHeight":"40px","fontWeight":"700"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"numeric-metric":["28px",{"lineHeight":"36px","fontWeight":"800"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-24 bg-surface-container-lowest z-50 flex flex-col items-center justify-between py-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col items-center gap-space-md w-full"><a class="flex items-center justify-center p-space-xs rounded-xl hover:bg-surface-container-low transition-colors" data-path="dashboard" href="#" title="SPK Enterprise Portal"><img alt="SPK Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtR-phJ_2U8OCcmlS0nyvWvMSlhVRwVbzlgFnbTkOukntso1NGbeZA1YdhYtVYTpqLRXqu5ZgkVwl0VLI4UFL2QQfzPkemTleTbhspYIKNWfgKPSxUY7jihZo2XDWPOCz_BoN52_1TJs25XBvt30kg9PcVItP-shFzQRzRW3V2c7XIhCF4iXYTGdTsHkNOG_bVXSEva75nQssyBQQEj3_uvz8zm-Vv0A87AHV0N46q"/></a><div class="w-10 h-px bg-outline-variant/30 my-space-xs"></div><nav class="flex flex-col items-center gap-space-sm w-full px-space-xs" data-active-classes="bg-primary text-on-primary shadow-[0_8px_16px_-4px_rgba(0,105,72,0.3)]"><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#" title="Dashboard Utama"><span class="material-symbols-outlined text-[24px]">dashboard</span><span class="font-label-sm text-label-sm mt-0.5 tracking-tight">Beranda</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="kriteria-dan-bobot" href="#" title="Kriteria &amp; Bobot Penilaian"><span class="material-symbols-outlined text-[24px]">tune</span><span class="font-label-sm text-label-sm mt-0.5 tracking-tight">Kriteria</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="alternatif-dan-matriks" href="#" title="Alternatif &amp; Matriks Evaluasi"><span class="material-symbols-outlined text-[24px]">table_chart</span><span class="font-label-sm text-label-sm mt-0.5 tracking-tight">Matriks</span></a><a aria-current="page" class="flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all group bg-primary text-on-primary shadow-[0_8px_16px_-4px_rgba(0,105,72,0.3)]" data-path="hasil-dan-keputusan" href="#" title="Hasil Perankingan &amp; Rekomendasi Keputusan"><span class="material-symbols-outlined text-[24px]">military_tech</span><span class="font-label-sm text-label-sm mt-0.5 tracking-tight">Keputusan</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="analisis-sensitivitas" href="#" title="Analisis Sensitivitas &amp; Simulasi Model"><span class="material-symbols-outlined text-[24px]">ssid_chart</span><span class="font-label-sm text-label-sm mt-0.5 tracking-tight">Simulasi</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="pengaturan-sistem" href="#" title="Konfigurasi Model &amp; Pengaturan"><span class="material-symbols-outlined text-[24px]">settings</span><span class="font-label-sm text-label-sm mt-0.5 tracking-tight">Sistem</span></a></nav></div><div class="flex flex-col items-center gap-space-sm w-full"><div class="relative flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8fdpWuHZNj2_xzONLX-LAh-ky2B8z2Ako5F_H3ovLaVkdq21gKGyl4ejesvAaahLpdZCEiY72BBLInv5s3JPWAcR_F0NrPNL4DwJ99TBzo_gUvrsqyQcsE5TbALO_WGlYIJgZY4K34dzdZ2sL7ZaiROqT2OHGgvV-BTu4I6N9ROpOUgF067n0PUJ-eSOtY3eH17VNTUzrkSQMDpRFO-0zwZwtIRmLPkWtP1_1cx-u"/><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary border-2 border-surface-container-lowest"></span></div></div></aside><div class="pl-24"><header class="fixed top-0 left-24 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><img alt="SPK Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtR-phJ_2U8OCcmlS0nyvWvMSlhVRwVbzlgFnbTkOukntso1NGbeZA1YdhYtVYTpqLRXqu5ZgkVwl0VLI4UFL2QQfzPkemTleTbhspYIKNWfgKPSxUY7jihZo2XDWPOCz_BoN52_1TJs25XBvt30kg9PcVItP-shFzQRzRW3V2c7XIhCF4iXYTGdTsHkNOG_bVXSEva75nQssyBQQEj3_uvz8zm-Vv0A87AHV0N46q"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight ml-space-xs">SPK Decision Suite</span></div><div class="hidden md:flex items-center gap-space-xs ml-space-md"><span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm">Metode: TOPSIS / SAW</span><span class="px-space-sm py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>Sinkron</span></div></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">calendar_today</span><span>Sabtu, 28 Juni 2025</span></div><div class="h-6 w-px bg-outline-variant/30 hidden sm:block"></div><nav class="hidden lg:flex items-center gap-space-md" data-active-classes="text-primary font-bold"><a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="dashboard" href="#">Ringkasan</a><a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="kriteria-dan-bobot" href="#">Kriteria</a><a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="alternatif-dan-matriks" href="#">Matriks Alternatif</a><a aria-current="page" class="transition-colors text-primary font-bold" data-path="hasil-dan-keputusan" href="#">Hasil &amp; Rekomendasi</a></nav><div class="flex items-center gap-space-xs"><button class="p-space-xs rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Notifikasi Sistem" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8fdpWuHZNj2_xzONLX-LAh-ky2B8z2Ako5F_H3ovLaVkdq21gKGyl4ejesvAaahLpdZCEiY72BBLInv5s3JPWAcR_F0NrPNL4DwJ99TBzo_gUvrsqyQcsE5TbALO_WGlYIJgZY4K34dzdZ2sL7ZaiROqT2OHGgvV-BTu4I6N9ROpOUgF067n0PUJ-eSOtY3eH17VNTUzrkSQMDpRFO-0zwZwtIRmLPkWtP1_1cx-u"/></div></div></div></header><main class="relative pt-16 w-full min-h-screen bg-background"><div class="flex flex-col w-full px-margin py-space-lg space-y-space-xl">
+<!-- Decorative Ambient Blur Backgrounds -->
+<div class="fixed top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="fixed bottom-10 left-32 w-80 h-80 bg-secondary/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Header Section with Actions -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-space-xs text-primary font-label-md text-label-md tracking-wider uppercase">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Decision Engine • Solusi Ideal TOPSIS Multikriteria</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Hasil Analisis &amp; Rekomendasi Keputusan</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+        Hasil komputasi metode TOPSIS: Evaluasi matriks kedekatan relatif (<span class="font-bold text-on-surface">V<sub>i</sub></span>), kalkulasi jarak solusi ideal positif (<span class="font-bold text-primary">D<sup>+</sup></span>) &amp; negatif (<span class="font-bold text-tertiary">D<sup>-</sup></span>), serta penetapan kuota prioritas terpilih.
+      </p>
+</div>
+<!-- Executive Action Bar -->
+<div class="flex flex-wrap items-center gap-space-xs shrink-0">
+<button class="flex items-center gap-2 px-space-md py-space-sm rounded-xl bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-all shadow-sm font-label-lg text-label-lg" type="button">
+<span class="material-symbols-outlined text-secondary text-[20px]">table_view</span>
+<span>Export Excel</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-space-sm rounded-xl bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-all shadow-sm font-label-lg text-label-lg" type="button">
+<span class="material-symbols-outlined text-error text-[20px]">picture_as_pdf</span>
+<span>Export PDF Rekomendasi</span>
+</button>
+<button class="flex items-center gap-2 px-space-lg py-space-sm rounded-xl bg-primary text-on-primary hover:bg-surface-tint shadow-[0_8px_20px_-4px_rgba(0,105,72,0.35)] transition-all font-label-lg text-label-lg group" id="btn-finalize" type="button">
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">lock</span>
+<span>Kunci Keputusan (Finalize)</span>
+</button>
+</div>
+</div>
+<!-- Key Metrics Quick Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[26px]">groups</span>
+</div>
+<div>
+<span class="text-on-surface-variant font-label-sm text-label-sm block">Total Alternatif Dinilai</span>
+<span class="text-on-surface font-numeric-metric text-numeric-metric">42 <span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Entitas</span></span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[26px]">tune</span>
+</div>
+<div>
+<span class="text-on-surface-variant font-label-sm text-label-sm block">Kriteria Terbobot</span>
+<span class="text-on-surface font-numeric-metric text-numeric-metric">6 <span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Dimensi</span></span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[26px]">check_circle</span>
+</div>
+<div>
+<span class="text-on-surface-variant font-label-sm text-label-sm block">Kuota Diterima</span>
+<span class="text-on-surface font-numeric-metric text-numeric-metric">3 <span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Utama (100%)</span></span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[26px]">analytics</span>
+</div>
+<div>
+<span class="text-on-surface-variant font-label-sm text-label-sm block">Tingkat Separasi TOPSIS</span>
+<span class="text-on-surface font-numeric-metric text-numeric-metric">94.2% <span class="font-label-sm text-label-sm text-primary font-normal">+4.2%</span></span>
+</div>
+</div>
+</div>
+<!-- Top 3 Podium Cards -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-end">
+<!-- Rank #2: Silver Winner (Order 2 on desktop, col-span-4) -->
+<div class="lg:col-span-4 order-2 lg:order-1 bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm relative overflow-hidden transition-all hover:-translate-y-1">
+<div class="absolute top-0 right-0 w-24 h-24 bg-surface-container rounded-bl-full -mr-4 -mt-4 opacity-50 pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-bold text-label-lg font-label-lg shadow-sm">
+            #2
+          </span>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide">
+            PERINGKAT DUA
+          </span>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> LOLOS KUOTA
+        </span>
+</div>
+<div class="mt-space-md space-y-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Alternatif A-019</span>
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">CV Media Prima Perkasa</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Penyedia infrastruktur jaringan multi-kantor &amp; integrasi sistem terpadu.</p>
+</div>
+<div class="mt-space-lg p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Skor Preferensi (Vi)</span>
+<span class="font-numeric-metric text-numeric-metric text-on-surface">0.8915</span>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Kelayakan</span>
+<span class="font-headline-sm text-headline-sm text-secondary">89.15%</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>D<sup>+</sup> (Positif): <strong class="text-on-surface">0.038</strong></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>D<sup>-</sup> (Negatif): <strong class="text-on-surface">0.312</strong></span>
+</div>
+</div>
+</div>
+<!-- Rank #1: Gold / High Emerald Hero Winner (Order 1 on desktop, col-span-4 elevated) -->
+<div class="lg:col-span-4 order-1 lg:order-2 bg-primary text-on-primary p-space-lg rounded-2xl shadow-[0_16px_36px_-6px_rgba(0,105,72,0.32)] relative overflow-hidden transform lg:-translate-y-3 transition-all hover:-translate-y-4">
+<div class="absolute -right-8 -top-8 w-36 h-36 bg-surface-tint rounded-full opacity-40 pointer-events-none"></div>
+<div class="absolute -left-10 -bottom-10 w-32 h-32 bg-primary-fixed-dim rounded-full opacity-20 pointer-events-none"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-headline-sm font-headline-sm shadow-md">
+            #1
+          </div>
+<span class="px-space-sm py-0.5 rounded-full bg-on-primary/20 text-on-primary font-label-sm text-label-sm uppercase tracking-wider backdrop-blur-sm">
+            JUARA UTAMA
+          </span>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">stars</span> REKOMENDASI UTAMA
+        </span>
+</div>
+<div class="mt-space-md space-y-1 relative z-10">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider">Alternatif A-042</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span>
+<span class="font-label-sm text-label-sm text-primary-fixed">Skor Tertinggi</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-primary tracking-tight">PT Solusi Cipta Mandiri</h2>
+<p class="font-body-sm text-body-sm text-on-primary/80 line-clamp-2">
+          Solusi terintegrasi dengan kesesuaian spesifikasi teknik tertinggi dan rasio efisiensi biaya paling optimal.
+        </p>
+</div>
+<!-- Hero Score Box -->
+<div class="mt-space-lg p-space-md bg-on-primary/10 backdrop-blur-md rounded-xl flex items-center justify-between relative z-10">
+<div>
+<span class="font-label-sm text-label-sm text-primary-fixed block">Skor Kedekatan Relatif (Vi)</span>
+<span class="font-numeric-metric text-numeric-metric text-on-primary">0.9420</span>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-primary-fixed block">Indeks Kelayakan</span>
+<span class="font-headline-md text-headline-md text-primary-fixed font-bold">94.20%</span>
+</div>
+</div>
+<!-- Separation Distances -->
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-primary/90 relative z-10">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-fixed"></span>
+<span>D<sup>+</sup> (Ideal Positif): <strong class="text-on-primary">0.021</strong></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+<span>D<sup>-</sup> (Ideal Negatif): <strong class="text-on-primary">0.342</strong></span>
+</div>
+</div>
+</div>
+<!-- Rank #3: Bronze Winner (Order 3 on desktop, col-span-4) -->
+<div class="lg:col-span-4 order-3 lg:order-3 bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm relative overflow-hidden transition-all hover:-translate-y-1">
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary-fixed rounded-bl-full -mr-4 -mt-4 opacity-40 pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-label-lg font-label-lg shadow-sm">
+            #3
+          </span>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide">
+            PERINGKAT TIGA
+          </span>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> LOLOS KUOTA
+        </span>
+</div>
+<div class="mt-space-md space-y-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Alternatif A-088</span>
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">Rekanan Bima Jaya</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Penyedia pengadaan perangkat keras &amp; layanan purna jual berkelanjutan.</p>
+</div>
+<div class="mt-space-lg p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Skor Preferensi (Vi)</span>
+<span class="font-numeric-metric text-numeric-metric text-on-surface">0.8540</span>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Kelayakan</span>
+<span class="font-headline-sm text-headline-sm text-tertiary">85.40%</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>D<sup>+</sup> (Positif): <strong class="text-on-surface">0.052</strong></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>D<sup>-</sup> (Negatif): <strong class="text-on-surface">0.304</strong></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Analytical Core: Tabs + Matrix Grid + Side Widgets -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Main Analytical Table Area (col-span-8) -->
+<div class="xl:col-span-8 space-y-space-md">
+<!-- Interactive Tab Controls & Filter Bar -->
+<div class="bg-surface-container-lowest p-space-sm rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-1 p-1 bg-surface-container rounded-xl overflow-x-auto">
+<button class="tab-btn active-tab px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all bg-surface-container-lowest text-primary shadow-sm" data-tab="ranking" type="button">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">format_list_numbered</span>
+<span>Peringkat Akhir (Ranking Table)</span>
+</span>
+</button>
+<button class="tab-btn px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:text-on-surface" data-tab="jarak" type="button">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">straighten</span>
+<span>Jarak Solusi Ideal (D+ &amp; D-)</span>
+</span>
+</button>
+<button class="tab-btn px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:text-on-surface" data-tab="matriks" type="button">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">grid_on</span>
+<span>Matriks Ternormalisasi (Y)</span>
+</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs px-space-xs">
+<div class="relative">
+<input class="bg-surface-container-low text-on-surface rounded-xl pl-8 pr-3 py-1.5 font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest transition-colors w-48" id="search-candidate" placeholder="Cari kandidat / kode..." type="text"/>
+<span class="material-symbols-outlined text-outline absolute left-2 top-2 text-[16px]">search</span>
+</div>
+<button class="p-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant" title="Filter Kuota" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Tab Content 1: Ranking Table -->
+<div class="tab-panel bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden" id="tab-ranking">
+<div class="p-space-md flex items-center justify-between bg-surface-container-low/50">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Peringkat Kelayakan Alternatif</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Diurutkan berdasarkan nilai kedekatan relatif TOPSIS (V<sub>i</sub>) tertinggi ke terendah.</p>
+</div>
+<span class="font-label-sm text-label-sm bg-primary/10 text-primary px-space-sm py-1 rounded-full">
+            10 Besar Ditampilkan
+          </span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+<th class="py-space-sm px-space-md">Rank</th>
+<th class="py-space-sm px-space-md">Kode</th>
+<th class="py-space-sm px-space-md">Nama Kandidat / Entitas</th>
+<th class="py-space-sm px-space-md text-right">Skor (V<sub>i</sub>)</th>
+<th class="py-space-sm px-space-md">Kelayakan</th>
+<th class="py-space-sm px-space-md">Status Kuota</th>
+<th class="py-space-sm px-space-md text-center">Rekomendasi</th>
+<th class="py-space-sm px-space-md text-center">Berkas</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-md text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high/40 transition-colors bg-primary-fixed/20 font-medium">
+<td class="py-space-md px-space-md">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-sm font-label-sm">1</span>
+</td>
+<td class="py-space-md px-space-md font-bold text-primary font-label-lg text-label-lg">A-042</td>
+<td class="py-space-md px-space-md">
+<div class="font-headline-sm text-headline-sm text-on-surface">PT Solusi Cipta Mandiri</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Sertifikasi ISO 27001 • Pengalaman 12 thn</div>
+</td>
+<td class="py-space-md px-space-md text-right font-numeric-metric text-headline-sm text-primary font-bold">0.9420</td>
+<td class="py-space-md px-space-md">
+<div class="w-24 bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 94.2%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 block">94.20%</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Lolos Utama
+                  </span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-1 rounded-xl bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow-sm">Direkomendasikan</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<button class="p-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface" title="Lihat Lampiran" type="button">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-space-md px-space-md">
+<span class="w-7 h-7 rounded-full bg-surface-container text-on-surface flex items-center justify-center font-bold text-label-sm font-label-sm">2</span>
+</td>
+<td class="py-space-md px-space-md font-bold text-secondary font-label-lg text-label-lg">A-019</td>
+<td class="py-space-md px-space-md">
+<div class="font-headline-sm text-headline-sm text-on-surface">CV Media Prima Perkasa</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Sertifikasi TKDN • Garansi 3 Tahun</div>
+</td>
+<td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm text-on-surface font-semibold">0.8915</td>
+<td class="py-space-md px-space-md">
+<div class="w-24 bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 89.1%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 block">89.15%</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Lolos Utama
+                  </span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-1 rounded-xl bg-surface-container-high text-primary font-label-sm text-label-sm font-bold">Direkomendasikan</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<button class="p-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface" title="Lihat Lampiran" type="button">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-space-md px-space-md">
+<span class="w-7 h-7 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-label-sm font-label-sm">3</span>
+</td>
+<td class="py-space-md px-space-md font-bold text-tertiary font-label-lg text-label-lg">A-088</td>
+<td class="py-space-md px-space-md">
+<div class="font-headline-sm text-headline-sm text-on-surface">Rekanan Bima Jaya</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Layanan 24/7 Support • Pusat Layanan Lokal</div>
+</td>
+<td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm text-on-surface font-semibold">0.8540</td>
+<td class="py-space-md px-space-md">
+<div class="w-24 bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 85.4%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 block">85.40%</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Lolos Utama
+                  </span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-1 rounded-xl bg-surface-container-high text-primary font-label-sm text-label-sm font-bold">Direkomendasikan</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<button class="p-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface" title="Lihat Lampiran" type="button">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-space-md px-space-md">
+<span class="w-7 h-7 rounded-full bg-surface-container-low text-on-surface-variant flex items-center justify-center font-bold text-label-sm font-label-sm">4</span>
+</td>
+<td class="py-space-md px-space-md font-bold text-on-surface font-label-lg text-label-lg">A-012</td>
+<td class="py-space-md px-space-md">
+<div class="font-headline-sm text-headline-sm text-on-surface">PT Nusantara Cyber Tech</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Solusi Cloud Hybrid • Kepatuhan Regulasi</div>
+</td>
+<td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm text-on-surface">0.7812</td>
+<td class="py-space-md px-space-md">
+<div class="w-24 bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 78.1%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 block">78.12%</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Lolos Cadangan
+                  </span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-1 rounded-xl bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Alternatif Cadangan</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<button class="p-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface" title="Lihat Lampiran" type="button">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-space-md px-space-md">
+<span class="w-7 h-7 rounded-full bg-surface-container-low text-on-surface-variant flex items-center justify-center font-bold text-label-sm font-label-sm">5</span>
+</td>
+<td class="py-space-md px-space-md font-bold text-on-surface font-label-lg text-label-lg">A-064</td>
+<td class="py-space-md px-space-md">
+<div class="font-headline-sm text-headline-sm text-on-surface">CV Karya Agung Mandiri</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Distributor Perangkat Resmi • Surabaya</div>
+</td>
+<td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm text-on-surface">0.7420</td>
+<td class="py-space-md px-space-md">
+<div class="w-24 bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 74.2%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 block">74.20%</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Lolos Cadangan
+                  </span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-1 rounded-xl bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Alternatif Cadangan</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<button class="p-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface" title="Lihat Lampiran" type="button">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-space-md px-space-md">
+<span class="w-7 h-7 rounded-full bg-surface-container-low text-on-surface-variant flex items-center justify-center font-bold text-label-sm font-label-sm">6</span>
+</td>
+<td class="py-space-md px-space-md font-bold text-on-surface font-label-lg text-label-lg">A-031</td>
+<td class="py-space-md px-space-md">
+<div class="font-headline-sm text-headline-sm text-on-surface">PT Sinergi Global Kreasi</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Pengadaan Konsultan TI • Jakarta</div>
+</td>
+<td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm text-on-surface">0.6890</td>
+<td class="py-space-md px-space-md">
+<div class="w-24 bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-outline h-full rounded-full" style="width: 68.9%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 block">68.90%</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Tidak Terpilih
+                  </span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-1 rounded-xl bg-surface-container-low text-outline font-label-sm text-label-sm">Di Bawah Batas</span>
+</td>
+<td class="py-space-md px-space-md text-center">
+<button class="p-1 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface" title="Lihat Lampiran" type="button">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination & Footer Status -->
+<div class="p-space-md bg-surface-container-low/40 flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+            Menampilkan <span class="font-bold text-on-surface">1 - 6</span> dari <span class="font-bold text-on-surface">42</span> alternatif yang dievaluasi
+          </div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface flex items-center justify-center hover:bg-surface-container disabled:opacity-40" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary font-bold text-label-sm font-label-sm flex items-center justify-center" type="button">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm font-label-sm flex items-center justify-center hover:bg-surface-container" type="button">2</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm font-label-sm flex items-center justify-center hover:bg-surface-container" type="button">3</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface flex items-center justify-center hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Tab Content 2: Jarak Solusi Ideal (Hidden by default) -->
+<div class="tab-panel hidden bg-surface-container-lowest rounded-2xl shadow-sm p-space-lg space-y-space-md" id="tab-jarak">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Jarak Solusi Ideal Positif (D+) &amp; Negatif (D-)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Formula Euclidean Distance antara setiap vektor ternormalisasi terbobot terhadap target ideal.</p>
+</div>
+<span class="px-space-sm py-1 bg-surface-container rounded-lg font-label-sm text-label-sm text-on-surface font-mono">D+ = √∑(y_ij - y+_j)²</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="p-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md text-primary mb-2">
+<span>Solusi Ideal Positif (A+)</span>
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Vektor nilai maksimal kriteria Benefit dan nilai minimal kriteria Cost.</p>
+<div class="space-y-1.5 font-label-sm text-label-sm">
+<div class="flex justify-between"><span>C1 - Biaya Pengadaan (Cost):</span> <strong class="font-mono text-on-surface">0.0382</strong></div>
+<div class="flex justify-between"><span>C2 - Kualitas Teknis (Benefit):</span> <strong class="font-mono text-on-surface">0.1412</strong></div>
+<div class="flex justify-between"><span>C3 - SLA &amp; Support (Benefit):</span> <strong class="font-mono text-on-surface">0.0984</strong></div>
+<div class="flex justify-between"><span>C4 - Portofolio (Benefit):</span> <strong class="font-mono text-on-surface">0.0815</strong></div>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md text-tertiary mb-2">
+<span>Solusi Ideal Negatif (A-)</span>
+<span class="material-symbols-outlined text-[20px]">trending_down</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Vektor nilai minimal kriteria Benefit dan nilai maksimal kriteria Cost.</p>
+<div class="space-y-1.5 font-label-sm text-label-sm">
+<div class="flex justify-between"><span>C1 - Biaya Pengadaan (Cost):</span> <strong class="font-mono text-on-surface">0.1250</strong></div>
+<div class="flex justify-between"><span>C2 - Kualitas Teknis (Benefit):</span> <strong class="font-mono text-on-surface">0.0410</strong></div>
+<div class="flex justify-between"><span>C3 - SLA &amp; Support (Benefit):</span> <strong class="font-mono text-on-surface">0.0210</strong></div>
+<div class="flex justify-between"><span>C4 - Portofolio (Benefit):</span> <strong class="font-mono text-on-surface">0.0152</strong></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tab Content 3: Matriks Normalisasi (Hidden by default) -->
+<div class="tab-panel hidden bg-surface-container-lowest rounded-2xl shadow-sm p-space-lg space-y-space-md" id="tab-matriks">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Matriks Normalisasi Terbobot (Y)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Hasil perkalian Matriks R dengan Vektor Bobot Kriteria W [0.30, 0.25, 0.20, 0.15, 0.10].</p>
+<div class="p-space-lg bg-surface-container-low rounded-xl text-center text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[36px] text-primary mb-2">grid_view</span>
+<p>Matriks lengkap dengan 42 x 6 sel tersedia untuk verifikasi audit.</p>
+</div>
+</div>
+</div>
+<!-- Right Side Analytical Widgets (col-span-4) -->
+<div class="xl:col-span-4 space-y-space-md">
+<!-- Widget 1: Sensitivitas Kriteria -->
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">ssid_chart</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Sensitivitas Kriteria</h3>
+</div>
+<span class="px-space-xs py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold">
+            Stabil (Robust)
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Simulasi ketahanan posisi #1 (PT Solusi Cipta Mandiri) terhadap fluktuasi bobot kriteria utama.
+        </p>
+<!-- Visual Bar Chart Sensitivity Component -->
+<div class="space-y-space-sm">
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface">C1: Biaya Pengadaan (30%)</span>
+<span class="font-bold text-primary">Toleransi ±18.4%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface">C2: Kualitas Teknis (25%)</span>
+<span class="font-bold text-primary">Toleransi ±24.1%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 91%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface">C3: Layanan SLA &amp; Support (20%)</span>
+<span class="font-bold text-secondary">Toleransi ±14.0%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 74%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface">C4: Portofolio &amp; Legalitas (15%)</span>
+<span class="font-bold text-tertiary">Toleransi ±9.8%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2.5 overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 61%"></div>
+</div>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-xl flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">info</span>
+<span>Hasil ranking tidak berubah selama bobot C1 &amp; C2 berada dalam interval toleransi di atas.</span>
+</div>
+</div>
+<!-- Widget 2: Pernyataan Pengesahan SPK (Digital Signature / Verification) -->
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">policy</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Pernyataan Pengesahan SPK</h3>
+</div>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-mono">
+            V-2025.06
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Dokumen keputusan ini dihasilkan secara otomatis oleh sistem DSS dengan integritas data terenkripsi SHA-256.
+        </p>
+<!-- Digital Approval Card Container -->
+<div class="bg-surface-container-low p-space-md rounded-xl space-y-space-sm">
+<div class="flex items-center gap-space-md">
+<!-- Digital Signer Avatar -->
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of an Indonesian executive chief decision officer wearing a tailored navy blazer, professional corporate headshot in a modern bright glass boardroom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABcKGzMxIDqYoju-tVWeVQcQBzIWDzIYJmZJcrcK9aUFvdwGKCXKd2oJIM1XW4qEjMZ1HBXKtZCf_sYjgBi5YoUzVanu-M73_uodtxPNyAR22DnB8KYJvot5WKq21ajCbcscdt6rPhLsBOJ6smJblpnc9A6KCJnGMQdE__B_ZerUfXAe68FN0rYZE_7uR31Ab6CBAbPuuzb5k_8CriPePVEjcictTCofGpH2xd06ns"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-primary rounded-full ring-2 ring-surface-container-lowest flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[10px]">check</span>
+</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-bold">Dr. Ir. Hendra Gunawan, M.T.</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Ketua Komite Seleksi Pengadaan</span>
+</div>
+</div>
+<div class="pt-space-xs space-y-1 font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex justify-between">
+<span>Waktu Otentikasi:</span>
+<strong class="text-on-surface font-mono">28 Jun 2025 • 14:38:09 WIB</strong>
+</div>
+<div class="flex justify-between">
+<span>Status Ledger:</span>
+<strong class="text-primary font-semibold">Tervalidasi Digital</strong>
+</div>
+</div>
+<!-- Cryptographic Hash Barcode Placeholder -->
+<div class="pt-space-xs p-space-xs bg-surface-container-lowest rounded-lg flex flex-col items-center justify-center space-y-1">
+<!-- Inline SVG Minimal Barcode -->
+<svg class="w-full h-8 text-on-surface-variant opacity-80" fill="currentColor" preserveaspectratio="none" viewbox="0 0 100 24">
+<rect height="24" width="2" x="0" y="0"></rect>
+<rect height="24" width="1" x="4" y="0"></rect>
+<rect height="24" width="3" x="7" y="0"></rect>
+<rect height="24" width="1" x="12" y="0"></rect>
+<rect height="24" width="4" x="15" y="0"></rect>
+<rect height="24" width="2" x="21" y="0"></rect>
+<rect height="24" width="1" x="25" y="0"></rect>
+<rect height="24" width="3" x="28" y="0"></rect>
+<rect height="24" width="2" x="33" y="0"></rect>
+<rect height="24" width="5" x="37" y="0"></rect>
+<rect height="24" width="1" x="44" y="0"></rect>
+<rect height="24" width="3" x="47" y="0"></rect>
+<rect height="24" width="2" x="52" y="0"></rect>
+<rect height="24" width="4" x="56" y="0"></rect>
+<rect height="24" width="1" x="62" y="0"></rect>
+<rect height="24" width="3" x="65" y="0"></rect>
+<rect height="24" width="2" x="70" y="0"></rect>
+<rect height="24" width="4" x="74" y="0"></rect>
+<rect height="24" width="2" x="80" y="0"></rect>
+<rect height="24" width="1" x="84" y="0"></rect>
+<rect height="24" width="3" x="87" y="0"></rect>
+<rect height="24" width="2" x="92" y="0"></rect>
+<rect height="24" width="4" x="96" y="0"></rect>
+</svg>
+<span class="font-mono text-[10px] text-outline tracking-wider">HASH: 9F8A-77C1-4D02-TOPSIS-DEC25</span>
+</div>
+</div>
+<button class="w-full py-space-sm rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>Unduh Sertifikat Berita Acara</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Interactive Tab Switching
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = 'tab-' + btn.getAttribute('data-tab');
+
+        // Reset Buttons
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+          b.classList.add('text-on-surface-variant');
+        });
+
+        // Activate Selected Button
+        btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        btn.classList.remove('text-on-surface-variant');
+
+        // Switch Panels
+        tabPanels.forEach(panel => {
+          if (panel.id === targetId) {
+            panel.classList.remove('hidden');
+          } else {
+            panel.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Finalize Button Interaction
+    const btnFinalize = document.getElementById('btn-finalize');
+    if (btnFinalize) {
+      btnFinalize.addEventListener('click', () => {
+        const isLocked = btnFinalize.classList.contains('bg-surface-tint');
+        if (!isLocked) {
+          btnFinalize.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span><span>Keputusan Terkunci</span>';
+          btnFinalize.classList.add('bg-surface-tint');
+          btnFinalize.classList.remove('hover:bg-surface-tint');
+          btnFinalize.setAttribute('disabled', 'true');
+          alert('Keputusan SPK TOPSIS berhasil dikunci dan disimpan secara permanen ke dalam catatan audit.');
+        }
+      });
+    }
+
+    // Client-side quick filter
+    const searchInput = document.getElementById('search-candidate');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('#tab-ranking tbody tr');
+        rows.forEach(row => {
+          const text = row.innerText.toLowerCase();
+          row.style.display = text.includes(query) ? '' : 'none';
+        });
+      });
+    }
+  })();
+</script></main></div></body></html>

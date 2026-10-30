@@ -1,0 +1,25 @@
+{
+  "content": [
+    {
+      "text": "{\"name\":\"projects/10562399908740465786/screens/3882b1dd59914629a5a197865617ca07\",\"title\":\"Kriteria dan Bobot - High Fidelity\",\"screenshot\":{\"name\":\"projects/10562399908740465786/screens/3882b1dd59914629a5a197865617ca07/fileEntries/screenshot\",\"downloadUrl\":\"https://stitch.googleapis.com/v1/projects/10562399908740465786/files/screenshot_00065f088ff91602057631b11220d4cd:download\",\"mimeType\":\"image/png\"},\"htmlCode\":{\"name\":\"projects/10562399908740465786/screens/3882b1dd59914629a5a197865617ca07/fileEntries/html\",\"downloadUrl\":\"https://stitch.googleapis.com/v1/projects/10562399908740465786/files/3882b1dd59914629a5a197865617ca07:download\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"3414\",\"deviceType\":\"DESKTOP\"}",
+      "type": "text"
+    }
+  ],
+  "structuredContent": {
+    "deviceType": "DESKTOP",
+    "height": "3414",
+    "htmlCode": {
+      "downloadUrl": "https://stitch.googleapis.com/v1/projects/10562399908740465786/files/3882b1dd59914629a5a197865617ca07:download",
+      "mimeType": "text/html",
+      "name": "projects/10562399908740465786/screens/3882b1dd59914629a5a197865617ca07/fileEntries/html"
+    },
+    "name": "projects/10562399908740465786/screens/3882b1dd59914629a5a197865617ca07",
+    "screenshot": {
+      "downloadUrl": "https://stitch.googleapis.com/v1/projects/10562399908740465786/files/screenshot_00065f088ff91602057631b11220d4cd:download",
+      "mimeType": "image/png",
+      "name": "projects/10562399908740465786/screens/3882b1dd59914629a5a197865617ca07/fileEntries/screenshot"
+    },
+    "title": "Kriteria dan Bobot - High Fidelity",
+    "width": "2560"
+  }
+}
