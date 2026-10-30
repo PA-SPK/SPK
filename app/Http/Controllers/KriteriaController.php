@@ -85,10 +85,19 @@ class KriteriaController extends Controller
     /**
      * Remove the specified criterion.
      */
-    public function destroy(Kriteria $kriteria): RedirectResponse
+    public function destroy(string|int $kriteria): RedirectResponse
     {
-        $kode = $kriteria->kode;
-        $kriteria->delete();
+        $item = Kriteria::find($kriteria);
+        if (! $item) {
+            $item = Kriteria::where('kode', $kriteria)->first();
+        }
+
+        if (! $item) {
+            return redirect()->route('spk.kriteria')->with('warning', 'Kriteria tidak ditemukan atau sudah dihapus.');
+        }
+
+        $kode = $item->kode;
+        $item->delete();
 
         // Recalculate AHP & persist
         $this->spkService->calculateAHP(true);

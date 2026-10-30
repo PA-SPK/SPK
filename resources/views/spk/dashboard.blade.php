@@ -98,8 +98,12 @@
             </div>
             <div class="mt-space-md">
                 <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Lokasi Rekomendasi #1</p>
-                <div class="font-numeric-metric text-numeric-metric text-primary mt-0.5 tracking-tight">L4 (64.12%)</div>
-                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 truncate">Desa Tanjung Harapan</p>
+                <div class="font-numeric-metric text-numeric-metric text-primary mt-0.5 tracking-tight">
+                    {{ $ranked[0]['kode'] ?? '-' }} ({{ isset($ranked[0]) ? round($ranked[0]['vi'] * 100, 2) . '%' : '-' }})
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 truncate">
+                    {{ $ranked[0]['alternatif']->nama ?? 'Belum ada alternatif' }}
+                </p>
             </div>
         </div>
 
@@ -163,8 +167,8 @@
             </div>
             
             <div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm border-t border-outline-variant/10">
-                <span>Rekomendasi Utama: <strong class="text-primary font-bold">L4 (Desa Tanjung Harapan)</strong></span>
-                <span class="text-on-surface-variant">V = 0.6412</span>
+                <span>Rekomendasi Utama: <strong class="text-primary font-bold">{{ $ranked[0]['kode'] ?? '-' }} ({{ $ranked[0]['alternatif']->nama ?? '-' }})</strong></span>
+                <span class="text-on-surface-variant">V = {{ isset($ranked[0]) ? number_format($ranked[0]['vi'], 4) : '0.0000' }}</span>
             </div>
         </div>
 
@@ -172,50 +176,33 @@
         <div class="lg:col-span-3 rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm border border-outline-variant/10 flex flex-col justify-between">
             <div>
                 <h2 class="font-headline-sm text-headline-sm text-on-surface">Prioritas Kriteria AHP</h2>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">Hasil sintesis matriks pakar Dinkes</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Hasil sintesis matriks perbandingan</p>
             </div>
 
             <!-- Kriteria Weights Breakdown -->
-            <div class="my-space-md flex flex-col gap-2.5">
-                <div class="flex items-center justify-between p-2 rounded-xl bg-primary-fixed/30 border border-primary/20">
-                    <div>
-                        <span class="font-label-sm font-bold text-primary block">K2: Jarak Faskes Terdekat</span>
-                        <span class="text-[10px] text-on-surface-variant">Benefit (Semakin jauh makin prioritas)</span>
+            <div class="my-space-md flex flex-col gap-2 max-h-[360px] overflow-y-auto pr-1">
+                @php
+                    $sortedKriterias = $ahp['kriterias']->sortByDesc(fn($k) => $ahp['weights'][$k->kode] ?? $k->bobot);
+                @endphp
+                @forelse($sortedKriterias as $k)
+                    @php
+                        $w = $ahp['weights'][$k->kode] ?? $k->bobot;
+                        $isTop = ($loop->first);
+                    @endphp
+                    <div class="flex items-center justify-between p-2 rounded-xl {{ $isTop ? 'bg-primary-fixed/30 border border-primary/20' : ($k->tipe == 'Cost' ? 'bg-tertiary-fixed/30 border border-tertiary/20' : 'bg-surface-container-low border border-outline-variant/10') }}">
+                        <div class="min-w-0 pr-2">
+                            <span class="font-label-sm font-bold {{ $isTop ? 'text-primary' : ($k->tipe == 'Cost' ? 'text-tertiary' : 'text-on-surface') }} block truncate">{{ $k->kode }}: {{ $k->nama }}</span>
+                            <span class="text-[10px] text-on-surface-variant">{{ $k->tipe }} ({{ $k->satuan ?? '-' }})</span>
+                        </div>
+                        <span class="font-headline-sm text-xs font-bold shrink-0 {{ $isTop ? 'text-primary' : ($k->tipe == 'Cost' ? 'text-tertiary' : 'text-on-surface') }}">{{ number_format($w * 100, 2) }}%</span>
                     </div>
-                    <span class="font-headline-sm text-sm font-bold text-primary">35.01%</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-low border border-outline-variant/10">
-                    <div>
-                        <span class="font-label-sm font-bold text-on-surface block">K3: Kasus Penyakit</span>
-                        <span class="text-[10px] text-on-surface-variant">Benefit (Riwayat kasus tahunan)</span>
-                    </div>
-                    <span class="font-headline-sm text-sm font-bold text-on-surface">20.41%</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-low border border-outline-variant/10">
-                    <div>
-                        <span class="font-label-sm font-bold text-on-surface block">K1: Kepadatan Penduduk</span>
-                        <span class="text-[10px] text-on-surface-variant">Benefit (Jumlah populasi terlayani)</span>
-                    </div>
-                    <span class="font-headline-sm text-sm font-bold text-on-surface">18.82%</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-low border border-outline-variant/10">
-                    <div>
-                        <span class="font-label-sm font-bold text-on-surface block">K6 & K4: Air & Akses Jalan</span>
-                        <span class="text-[10px] text-on-surface-variant">Benefit (Infrastruktur penunjang)</span>
-                    </div>
-                    <span class="font-headline-sm text-sm font-bold text-on-surface">19.82%</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded-xl bg-tertiary-fixed/30 border border-tertiary/20">
-                    <div>
-                        <span class="font-label-sm font-bold text-tertiary block">K5: Biaya Lahan (Cost)</span>
-                        <span class="text-[10px] text-on-surface-variant">Cost (Efisiensi anggaran daerah)</span>
-                    </div>
-                    <span class="font-headline-sm text-sm font-bold text-tertiary">5.94%</span>
-                </div>
+                @empty
+                    <div class="text-xs text-on-surface-variant text-center py-4">Belum ada kriteria.</div>
+                @endforelse
             </div>
 
             <div class="pt-space-xs text-center border-t border-outline-variant/10">
-                <span class="font-label-sm text-label-sm text-primary font-bold">Total Akumulasi Bobot: 100.00%</span>
+                <span class="font-label-sm text-label-sm text-primary font-bold">Total Akumulasi: {{ number_format(array_sum($ahp['weights']) * 100, 1) }}%</span>
             </div>
         </div>
 

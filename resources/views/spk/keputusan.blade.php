@@ -15,156 +15,183 @@
                 <span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide uppercase">Dinas Kesehatan Kabupaten (Kelompok 6)</span>
             </div>
             <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Hasil Evaluasi & Rekomendasi Lokasi Puskesmas</h1>
-            <p class="font-body-md text-on-surface-variant mt-0.5">Penetapan 1 lokasi terbaik pembangunan Puskesmas Rawat Inap Baru berdasarkan ranking kedekatan relatif (Vi)</p>
+            <p class="font-body-md text-on-surface-variant mt-0.5">Penetapan rekomendasi lokasi pembangunan Puskesmas Rawat Inap Baru berdasarkan ranking kedekatan relatif (Vi)</p>
         </div>
-        <div class="flex items-center gap-space-sm">
-            <button type="button" onclick="window.print()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container shadow-md shadow-primary/20 transition-all font-semibold">
+        <div class="flex flex-wrap items-center gap-space-sm">
+            <a href="{{ route('spk.alternatif') }}" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-high text-on-surface font-label-md text-sm border border-outline-variant/20 hover:bg-surface-container-highest transition-all font-semibold">
+                <span class="material-symbols-outlined text-[18px]">edit_note</span>
+                <span>Ubah Data Matriks</span>
+            </a>
+            <button type="button" onclick="window.print()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold">
                 <span class="material-symbols-outlined text-[20px]">print</span>
-                <span>Cetak Laporan Keputusan</span>
+                <span>Cetak Laporan</span>
             </button>
         </div>
     </div>
 
+    @if(count($ranked) > 0)
     <!-- Top 3 Podium Winners Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-end">
         <!-- Rank #2: Silver Winner (Order 2 on desktop) -->
         <div class="lg:col-span-4 order-2 lg:order-1 bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm border border-outline-variant/10 relative overflow-hidden transition-all hover:-translate-y-1">
-            <div class="absolute top-0 right-0 w-24 h-24 bg-surface-container rounded-bl-full -mr-4 -mt-4 opacity-50 pointer-events-none"></div>
-            <div class="flex items-start justify-between">
-                <div class="flex items-center gap-2">
-                    <span class="w-8 h-8 rounded-full bg-surface-container text-on-surface flex items-center justify-center font-bold text-label-lg shadow-sm">
-                        #2
+            @if($podium['runner_up'])
+                <div class="absolute top-0 right-0 w-24 h-24 bg-surface-container rounded-bl-full -mr-4 -mt-4 opacity-50 pointer-events-none"></div>
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-full bg-surface-container text-on-surface flex items-center justify-center font-bold text-label-lg shadow-sm">
+                            #2
+                        </span>
+                        <span class="px-space-xs py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide font-semibold">
+                            PERINGKAT DUA
+                        </span>
+                    </div>
+                    <span class="px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-bold flex items-center gap-1">
+                        CADANGAN #1
                     </span>
-                    <span class="px-space-xs py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide font-semibold">
-                        PERINGKAT DUA
-                    </span>
                 </div>
-                <span class="px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-bold flex items-center gap-1">
-                    CADANGAN #1
-                </span>
-            </div>
-            <div class="mt-space-md space-y-1">
-                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-mono font-bold">{{ $podium['runner_up']['kode'] }}</span>
-                <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1 font-bold">{{ $podium['runner_up']['alternatif']->nama }}</h3>
-                <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">{{ $podium['runner_up']['alternatif']->deskripsi }}</p>
-            </div>
-            <div class="mt-space-lg p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between border border-outline-variant/10">
-                <div>
-                    <span class="font-label-sm text-label-sm text-on-surface-variant block">Skor Preferensi (Vi)</span>
-                    <span class="font-numeric-metric text-numeric-metric text-on-surface font-bold">{{ number_format($podium['runner_up']['vi'], 4) }}</span>
+                <div class="mt-space-md space-y-1">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-mono font-bold">{{ $podium['runner_up']['kode'] }}</span>
+                    <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1 font-bold">{{ $podium['runner_up']['alternatif']->nama }}</h3>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">{{ $podium['runner_up']['alternatif']->deskripsi ?? '-' }}</p>
                 </div>
-                <div class="text-right">
-                    <span class="font-label-sm text-label-sm text-on-surface-variant block">Kelayakan</span>
-                    <span class="font-headline-sm text-headline-sm text-secondary font-bold">{{ $podium['runner_up']['kelayakan'] }}</span>
+                <div class="mt-space-lg p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between border border-outline-variant/10">
+                    <div>
+                        <span class="font-label-sm text-label-sm text-on-surface-variant block">Skor Preferensi (Vi)</span>
+                        <span class="font-numeric-metric text-numeric-metric text-on-surface font-bold">{{ number_format($podium['runner_up']['vi'], 4) }}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-label-sm text-label-sm text-on-surface-variant block">Kelayakan</span>
+                        <span class="font-headline-sm text-headline-sm text-secondary font-bold">{{ $podium['runner_up']['kelayakan'] }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant border-t border-outline-variant/10">
-                <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-primary"></span>
-                    <span>D<sup>+</sup>: <strong class="text-on-surface font-mono">{{ number_format($podium['runner_up']['d_plus'], 4) }}</strong></span>
+                <div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant border-t border-outline-variant/10">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span>
+                        <span>D<sup>+</sup>: <strong class="text-on-surface font-mono">{{ number_format($podium['runner_up']['d_plus'], 4) }}</strong></span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                        <span>D<sup>-</sup>: <strong class="text-on-surface font-mono">{{ number_format($podium['runner_up']['d_minus'], 4) }}</strong></span>
+                    </div>
                 </div>
-                <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-tertiary"></span>
-                    <span>D<sup>-</sup>: <strong class="text-on-surface font-mono">{{ number_format($podium['runner_up']['d_minus'], 4) }}</strong></span>
+            @else
+                <div class="py-12 text-center text-on-surface-variant">
+                    <span class="material-symbols-outlined text-4xl mb-2 opacity-40">hourglass_empty</span>
+                    <p class="text-xs">Belum ada alternatif untuk Peringkat #2</p>
                 </div>
-            </div>
+            @endif
         </div>
 
         <!-- Rank #1: Gold / Emerald Hero Winner (Center, Elevated) -->
         <div class="lg:col-span-4 order-1 lg:order-2 bg-primary text-on-primary p-space-lg rounded-2xl shadow-[0_16px_36px_-6px_rgba(0,105,72,0.32)] relative overflow-hidden transform lg:-translate-y-3 transition-all hover:-translate-y-4">
-            <div class="absolute -right-8 -top-8 w-36 h-36 bg-surface-tint rounded-full opacity-40 pointer-events-none"></div>
-            <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-primary-fixed-dim rounded-full opacity-20 pointer-events-none"></div>
-            <div class="flex items-start justify-between relative z-10">
-                <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-headline-sm shadow-md">
-                        #1
+            @if($podium['juara'])
+                <div class="absolute -right-8 -top-8 w-36 h-36 bg-surface-tint rounded-full opacity-40 pointer-events-none"></div>
+                <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-primary-fixed-dim rounded-full opacity-20 pointer-events-none"></div>
+                <div class="flex items-start justify-between relative z-10">
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-headline-sm shadow-md">
+                            #1
+                        </div>
+                        <span class="px-space-sm py-0.5 rounded-full bg-on-primary/20 text-on-primary font-label-sm text-label-sm uppercase tracking-wider backdrop-blur-sm font-bold">
+                            LOKASI TERBAIK
+                        </span>
                     </div>
-                    <span class="px-space-sm py-0.5 rounded-full bg-on-primary/20 text-on-primary font-label-sm text-label-sm uppercase tracking-wider backdrop-blur-sm font-bold">
-                        LOKASI TERBAIK
+                    <span class="px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm">
+                        <span class="material-symbols-outlined text-[16px]">stars</span> REKOMENDASI UTAMA
                     </span>
                 </div>
-                <span class="px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm">
-                    <span class="material-symbols-outlined text-[16px]">stars</span> REKOMENDASI UTAMA
-                </span>
-            </div>
-            <div class="mt-space-md space-y-1 relative z-10">
-                <div class="flex items-center gap-2">
-                    <span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider font-mono font-bold">{{ $podium['juara']['kode'] }}</span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span>
-                    <span class="font-label-sm text-label-sm text-primary-fixed">Skor Tertinggi</span>
+                <div class="mt-space-md space-y-1 relative z-10">
+                    <div class="flex items-center gap-2">
+                        <span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider font-mono font-bold">{{ $podium['juara']['kode'] }}</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span>
+                        <span class="font-label-sm text-label-sm text-primary-fixed">Skor Tertinggi</span>
+                    </div>
+                    <h2 class="font-headline-lg text-headline-lg text-on-primary tracking-tight font-bold">{{ $podium['juara']['alternatif']->nama }}</h2>
+                    <p class="font-body-sm text-body-sm text-on-primary/90 line-clamp-2">
+                        {{ $podium['juara']['alternatif']->deskripsi ?? 'Alternatif dengan skor kedekatan relatif TOPSIS tertinggi.' }}
+                    </p>
                 </div>
-                <h2 class="font-headline-lg text-headline-lg text-on-primary tracking-tight font-bold">{{ $podium['juara']['alternatif']->nama }}</h2>
-                <p class="font-body-sm text-body-sm text-on-primary/90 line-clamp-2">
-                    {{ $podium['juara']['alternatif']->deskripsi }} Jarak faskes 25 km & biaya lahan paling ekonomis.
-                </p>
-            </div>
-            <!-- Hero Score Box -->
-            <div class="mt-space-lg p-space-md bg-on-primary/10 backdrop-blur-md rounded-xl flex items-center justify-between relative z-10 border border-white/10">
-                <div>
-                    <span class="font-label-sm text-label-sm text-primary-fixed block font-medium">Skor Kedekatan Relatif (Vi)</span>
-                    <span class="font-numeric-metric text-numeric-metric text-on-primary font-bold">{{ number_format($podium['juara']['vi'], 4) }}</span>
+                <!-- Hero Score Box -->
+                <div class="mt-space-lg p-space-md bg-on-primary/10 backdrop-blur-md rounded-xl flex items-center justify-between relative z-10 border border-white/10">
+                    <div>
+                        <span class="font-label-sm text-label-sm text-primary-fixed block font-medium">Skor Kedekatan Relatif (Vi)</span>
+                        <span class="font-numeric-metric text-numeric-metric text-on-primary font-bold">{{ number_format($podium['juara']['vi'], 4) }}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-label-sm text-label-sm text-primary-fixed block font-medium">Indeks Kelayakan</span>
+                        <span class="font-headline-md text-headline-md text-primary-fixed font-bold">{{ $podium['juara']['kelayakan'] }}</span>
+                    </div>
                 </div>
-                <div class="text-right">
-                    <span class="font-label-sm text-label-sm text-primary-fixed block font-medium">Indeks Kelayakan</span>
-                    <span class="font-headline-md text-headline-md text-primary-fixed font-bold">{{ $podium['juara']['kelayakan'] }}</span>
+                <!-- Separation Distances -->
+                <div class="mt-space-md pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-primary/90 relative z-10 border-t border-white/10">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-primary-fixed"></span>
+                        <span>D<sup>+</sup> (Positif): <strong class="text-on-primary font-mono">{{ number_format($podium['juara']['d_plus'], 4) }}</strong></span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+                        <span>D<sup>-</sup> (Negatif): <strong class="text-on-primary font-mono">{{ number_format($podium['juara']['d_minus'], 4) }}</strong></span>
+                    </div>
                 </div>
-            </div>
-            <!-- Separation Distances -->
-            <div class="mt-space-md pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-primary/90 relative z-10 border-t border-white/10">
-                <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-primary-fixed"></span>
-                    <span>D<sup>+</sup> (Positif): <strong class="text-on-primary font-mono">{{ number_format($podium['juara']['d_plus'], 4) }}</strong></span>
+            @else
+                <div class="py-12 text-center text-on-primary/80">
+                    <span class="material-symbols-outlined text-4xl mb-2 opacity-60">hourglass_empty</span>
+                    <p class="text-xs">Belum ada alternatif yang dievaluasi.</p>
                 </div>
-                <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
-                    <span>D<sup>-</sup> (Negatif): <strong class="text-on-primary font-mono">{{ number_format($podium['juara']['d_minus'], 4) }}</strong></span>
-                </div>
-            </div>
+            @endif
         </div>
 
         <!-- Rank #3: Bronze Winner (Order 3 on desktop) -->
         <div class="lg:col-span-4 order-3 lg:order-3 bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm border border-outline-variant/10 relative overflow-hidden transition-all hover:-translate-y-1">
-            <div class="absolute top-0 right-0 w-24 h-24 bg-tertiary-fixed rounded-bl-full -mr-4 -mt-4 opacity-40 pointer-events-none"></div>
-            <div class="flex items-start justify-between">
-                <div class="flex items-center gap-2">
-                    <span class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-label-lg shadow-sm">
-                        #3
+            @if($podium['third'])
+                <div class="absolute top-0 right-0 w-24 h-24 bg-tertiary-fixed rounded-bl-full -mr-4 -mt-4 opacity-40 pointer-events-none"></div>
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-label-lg shadow-sm">
+                            #3
+                        </span>
+                        <span class="px-space-xs py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide font-semibold">
+                            PERINGKAT TIGA
+                        </span>
+                    </div>
+                    <span class="px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-bold flex items-center gap-1">
+                        CADANGAN #2
                     </span>
-                    <span class="px-space-xs py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide font-semibold">
-                        PERINGKAT TIGA
-                    </span>
                 </div>
-                <span class="px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-bold flex items-center gap-1">
-                    CADANGAN #2
-                </span>
-            </div>
-            <div class="mt-space-md space-y-1">
-                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-mono font-bold">{{ $podium['third']['kode'] }}</span>
-                <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1 font-bold">{{ $podium['third']['alternatif']->nama }}</h3>
-                <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">{{ $podium['third']['alternatif']->deskripsi }}</p>
-            </div>
-            <div class="mt-space-lg p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between border border-outline-variant/10">
-                <div>
-                    <span class="font-label-sm text-label-sm text-on-surface-variant block">Skor Preferensi (Vi)</span>
-                    <span class="font-numeric-metric text-numeric-metric text-on-surface font-bold">{{ number_format($podium['third']['vi'], 4) }}</span>
+                <div class="mt-space-md space-y-1">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-mono font-bold">{{ $podium['third']['kode'] }}</span>
+                    <h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1 font-bold">{{ $podium['third']['alternatif']->nama }}</h3>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">{{ $podium['third']['alternatif']->deskripsi ?? '-' }}</p>
                 </div>
-                <div class="text-right">
-                    <span class="font-label-sm text-label-sm text-on-surface-variant block">Kelayakan</span>
-                    <span class="font-headline-sm text-headline-sm text-tertiary font-bold">{{ $podium['third']['kelayakan'] }}</span>
+                <div class="mt-space-lg p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between border border-outline-variant/10">
+                    <div>
+                        <span class="font-label-sm text-label-sm text-on-surface-variant block">Skor Preferensi (Vi)</span>
+                        <span class="font-numeric-metric text-numeric-metric text-on-surface font-bold">{{ number_format($podium['third']['vi'], 4) }}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-label-sm text-label-sm text-on-surface-variant block">Kelayakan</span>
+                        <span class="font-headline-sm text-headline-sm text-tertiary font-bold">{{ $podium['third']['kelayakan'] }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant border-t border-outline-variant/10">
-                <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-primary"></span>
-                    <span>D<sup>+</sup>: <strong class="text-on-surface font-mono">{{ number_format($podium['third']['d_plus'], 4) }}</strong></span>
+                <div class="mt-space-md pt-space-sm flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant border-t border-outline-variant/10">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span>
+                        <span>D<sup>+</sup>: <strong class="text-on-surface font-mono">{{ number_format($podium['third']['d_plus'], 4) }}</strong></span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                        <span>D<sup>-</sup>: <strong class="text-on-surface font-mono">{{ number_format($podium['third']['d_minus'], 4) }}</strong></span>
+                    </div>
                 </div>
-                <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-tertiary"></span>
-                    <span>D<sup>-</sup>: <strong class="text-on-surface font-mono">{{ number_format($podium['third']['d_minus'], 4) }}</strong></span>
+            @else
+                <div class="py-12 text-center text-on-surface-variant">
+                    <span class="material-symbols-outlined text-4xl mb-2 opacity-40">hourglass_empty</span>
+                    <p class="text-xs">Belum ada alternatif untuk Peringkat #3</p>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
+    @endif
 
     <!-- Analytical Core: Tabs + Full Ranking Table & Side Panel -->
     <div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
@@ -208,7 +235,7 @@
                         <p class="font-body-sm text-body-sm text-on-surface-variant">Diurutkan berdasarkan rumus kedekatan relatif TOPSIS: V<sub>i</sub> = D<sub>i</sub><sup>-</sup> / (D<sub>i</sub><sup>+</sup> + D<sub>i</sub><sup>-</sup>)</p>
                     </div>
                     <span class="font-label-sm text-label-sm bg-primary/10 text-primary px-space-sm py-1 rounded-full font-semibold">
-                        8 Lokasi Dievaluasi
+                        {{ count($ranked) }} Lokasi Dievaluasi
                     </span>
                 </div>
                 <div class="overflow-x-auto">
@@ -225,7 +252,7 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-outline-variant/10 font-body-md text-body-md text-on-surface" id="ranking-table-body">
-                            @foreach($ranked as $row)
+                            @forelse($ranked as $row)
                                 <tr class="hover:bg-surface-container-high/40 transition-colors {{ $row['rank'] == 1 ? 'bg-primary-fixed/20 font-medium' : '' }}">
                                     <td class="py-space-md px-space-md text-center">
                                         <span class="w-7 h-7 rounded-full {{ $row['rank'] == 1 ? 'bg-primary text-on-primary' : ($row['rank'] == 2 ? 'bg-secondary text-on-secondary' : ($row['rank'] == 3 ? 'bg-tertiary text-on-tertiary' : 'bg-surface-container text-on-surface')) }} flex items-center justify-center font-bold text-label-sm mx-auto">
@@ -255,7 +282,13 @@
                                         </span>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="py-8 text-center text-on-surface-variant">
+                                        Belum ada alternatif yang dievaluasi. Silakan tambahkan alternatif di menu Alternatif & Matriks.
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -272,23 +305,27 @@
                         <div class="p-space-md rounded-xl bg-primary-fixed/20 border border-primary/20 space-y-2">
                             <span class="font-label-md text-primary font-bold block">Solusi Ideal Positif (A+)</span>
                             <div class="space-y-1 text-xs font-mono">
-                                @foreach($topsis['ideal_positive'] as $kKode => $val)
+                                @forelse($topsis['ideal_positive'] as $kKode => $val)
                                     <div class="flex justify-between">
                                         <span class="text-on-surface-variant">{{ $kKode }}:</span>
-                                        <span class="font-bold text-primary">{{ number_format($val, 10) }}</span>
+                                        <span class="font-bold text-primary">{{ number_format($val, 6) }}</span>
                                     </div>
-                                @endforeach
+                                @empty
+                                    <div class="text-on-surface-variant text-xs">Belum ada data kriteria.</div>
+                                @endforelse
                             </div>
                         </div>
                         <div class="p-space-md rounded-xl bg-tertiary-fixed/30 border border-tertiary/20 space-y-2">
                             <span class="font-label-md text-tertiary font-bold block">Solusi Ideal Negatif (A-)</span>
                             <div class="space-y-1 text-xs font-mono">
-                                @foreach($topsis['ideal_negative'] as $kKode => $val)
+                                @forelse($topsis['ideal_negative'] as $kKode => $val)
                                     <div class="flex justify-between">
                                         <span class="text-on-surface-variant">{{ $kKode }}:</span>
-                                        <span class="font-bold text-tertiary">{{ number_format($val, 10) }}</span>
+                                        <span class="font-bold text-tertiary">{{ number_format($val, 6) }}</span>
                                     </div>
-                                @endforeach
+                                @empty
+                                    <div class="text-on-surface-variant text-xs">Belum ada data kriteria.</div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -313,15 +350,21 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-outline-variant/10">
-                            @foreach($topsis['matrix_y'] as $altKode => $cols)
-                                <tr class="hover:bg-surface-container-low/50 {{ $altKode == 'L4' ? 'bg-primary-fixed/20 font-bold' : '' }}">
+                            @forelse($topsis['matrix_y'] as $altKode => $cols)
+                                <tr class="hover:bg-surface-container-low/50 {{ ($podium['juara'] && $altKode == $podium['juara']['kode']) ? 'bg-primary-fixed/20 font-bold' : '' }}">
                                     <td class="py-2.5 px-3 text-left font-bold text-primary">{{ $altKode }}</td>
                                     <td class="py-2.5 px-3 text-left font-sans">{{ $topsis['alternatifs']->where('kode', $altKode)->first()->nama ?? '' }}</td>
                                     @foreach($cols as $kKode => $val)
                                         <td class="py-2.5 px-3">{{ number_format($val, 4) }}</td>
                                     @endforeach
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="{{ count($topsis['kriterias']) + 2 }}" class="py-6 text-center text-on-surface-variant">
+                                        Belum ada data matriks.
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -334,34 +377,44 @@
             <div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm border border-outline-variant/10">
                 <div class="flex items-center gap-2 text-primary mb-space-sm">
                     <span class="material-symbols-outlined text-[24px]">verified</span>
-                    <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Keputusan Resmi Tim Ahli</h3>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Keputusan Rekomendasi Utama</h3>
                 </div>
+                @if($podium['juara'])
                 <div class="p-space-md bg-primary-fixed/20 rounded-xl space-y-2 border border-primary/20">
                     <div class="text-xs text-on-surface-variant font-medium">Rekomendasi 1 Lokasi Terpilih:</div>
-                    <div class="font-headline-md text-lg text-primary font-bold">L4 - Desa Tanjung Harapan</div>
+                    <div class="font-headline-md text-lg text-primary font-bold">{{ $podium['juara']['kode'] }} - {{ $podium['juara']['alternatif']->nama }}</div>
                     <div class="text-xs text-on-surface space-y-1 pt-1 border-t border-primary/20">
                         <div class="flex justify-between">
                             <span>Skor Preferensi (Vi):</span>
-                            <span class="font-bold font-mono">0.6412066614</span>
+                            <span class="font-bold font-mono">{{ number_format($podium['juara']['vi'], 6) }}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span>Jarak Faskes Terdekat:</span>
-                            <span class="font-bold">25 Km (Terjauh)</span>
+                            <span>Indeks Kelayakan:</span>
+                            <span class="font-bold text-primary">{{ $podium['juara']['kelayakan'] }}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span>Biaya Lahan:</span>
-                            <span class="font-bold">250 Juta (Paling Murah)</span>
+                            <span>Jarak Positif (D+):</span>
+                            <span class="font-bold font-mono">{{ number_format($podium['juara']['d_plus'], 4) }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Jarak Negatif (D-):</span>
+                            <span class="font-bold font-mono">{{ number_format($podium['juara']['d_minus'], 4) }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="mt-space-md">
                     <p class="text-xs text-on-surface-variant leading-relaxed">
-                        Desa Tanjung Harapan terpilih sebagai lokasi paling ideal karena sangat memenuhi preferensi tim pakar: berada paling jauh dari faskes lain (25 km) sehingga paling membutuhkan fasilitas rawat inap baru, serta memiliki efisiensi biaya lahan tertinggi.
+                        Lokasi <strong>{{ $podium['juara']['alternatif']->nama }} ({{ $podium['juara']['kode'] }})</strong> terpilih sebagai prioritas tertinggi pembangunan Puskesmas Rawat Inap Baru dengan nilai kedekatan relatif <strong>{{ number_format($podium['juara']['vi'], 4) }}</strong> terhadap solusi ideal positif (A+) dan negatif (A-).
                     </p>
                 </div>
+                @else
+                <div class="p-space-md bg-surface-container-low rounded-xl text-center text-xs text-on-surface-variant">
+                    Belum ada alternatif yang dievaluasi.
+                </div>
+                @endif
             </div>
 
-            <!-- Profil Kelompok 6 -->
+            <!-- Profil Tim Kelompok 6 -->
             <div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm border border-outline-variant/10">
                 <div class="flex items-center gap-2 text-primary mb-2">
                     <span class="material-symbols-outlined text-[20px]">group</span>

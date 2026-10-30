@@ -44,14 +44,8 @@
         </nav>
     </div>
 
-    <!-- Bottom Profile / Status -->
-    <div class="flex flex-col items-center gap-space-sm w-full">
-        <div class="relative flex items-center justify-center">
-            <div class="w-9 h-9 rounded-full bg-surface-container-high text-primary flex items-center justify-center font-bold text-xs border border-outline-variant/30">
-                AD
-            </div>
-            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary border-2 border-surface-container-lowest"></span>
-        </div>
+    <!-- Bottom Indicator -->
+    <div class="flex flex-col items-center gap-1 w-full text-on-surface-variant/40">
+        <span class="text-[9px] font-mono font-bold">SPK</span>
     </div>
 </aside>
-

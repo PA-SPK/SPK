@@ -4,7 +4,7 @@
         <!-- Left: Brand Title & Method Badge -->
         <div class="flex items-center gap-space-md">
             <div class="flex items-center gap-2">
-                <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">SPK Decision Suite</span>
+                <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">SPK </span>
                 <span class="text-outline-variant/60 font-light">/</span>
                 <span class="text-on-surface-variant font-label-md text-label-md">
                     @yield('page_title', 'Dashboard')
@@ -19,31 +19,30 @@
             </div>
         </div>
 
-        <!-- Right: Minimalist Status & Profile -->
+        <!-- Right: Real-time Live Calendar Date -->
         <div class="flex items-center gap-space-md">
-            <!-- Date Display -->
-            <div class="hidden sm:flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm bg-surface-container-low px-3 py-1.5 rounded-xl">
-                <span class="material-symbols-outlined text-[16px] text-primary">calendar_today</span>
-                <span>Sabtu, 28 Juni 2025</span>
-            </div>
-
-            <!-- Notification Icon -->
-            <button class="p-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors relative" title="Notifikasi Sistem" type="button">
-                <span class="material-symbols-outlined text-[20px]">notifications</span>
-                <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary"></span>
-            </button>
-
-            <!-- Minimal Profile Pill -->
-            <div class="flex items-center gap-2 pl-2 border-l border-outline-variant/30">
-                <div class="hidden lg:flex flex-col text-right">
-                    <span class="font-label-sm text-on-surface font-semibold leading-tight">Admin SPK</span>
-                    <span class="text-[10px] text-on-surface-variant leading-tight">Pengambil Keputusan</span>
-                </div>
-                <div class="w-8 h-8 rounded-xl bg-primary text-on-primary font-bold text-xs flex items-center justify-center shadow-sm">
-                    A
-                </div>
+            <!-- Dynamic Calendar Date Display -->
+            <div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-xs bg-surface-container-low px-3.5 py-1.5 rounded-xl border border-outline-variant/20 shadow-xs">
+                <span class="material-symbols-outlined text-[17px] text-primary">calendar_month</span>
+                <span id="live-calendar-date" class="font-semibold text-on-surface"></span>
             </div>
         </div>
     </div>
 </header>
 
+<script>
+    (function() {
+        function refreshLiveDate() {
+            const dateEl = document.getElementById('live-calendar-date');
+            if (!dateEl) return;
+            const now = new Date();
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            dateEl.textContent = now.toLocaleDateString('id-ID', options);
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', refreshLiveDate);
+        } else {
+            refreshLiveDate();
+        }
+    })();
+</script>
