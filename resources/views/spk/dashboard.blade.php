@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard SPK - Lokasi Pembangunan Puskesmas')
+@section('title', 'Dashboard SPK - Sistem Pendukung Keputusan AHP & TOPSIS')
 @section('page_title', 'Ringkasan Dashboard')
 
 @section('content')
@@ -10,24 +10,74 @@
         <div>
             <div class="flex items-center gap-2 mb-1">
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
-                    Kelompok 6
+                    Sistem Pendukung Keputusan
                 </span>
-                <span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide uppercase">Dinas Kesehatan Kabupaten</span>
+                <span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide uppercase">AHP & TOPSIS</span>
             </div>
-            <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">SPK Lokasi Pembangunan Puskesmas</h1>
-            <p class="font-body-md text-on-surface-variant mt-0.5">Penentuan 1 rekomendasi lokasi terbaik Puskesmas Rawat Inap Baru berbasis metode AHP & TOPSIS</p>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Dashboard Perhitungan SPK</h1>
+            <p class="font-body-md text-on-surface-variant mt-0.5">Pengambilan keputusan multi-kriteria menggunakan Analytical Hierarchy Process (AHP) dan Technique for Order of Preference by Similarity to Ideal Solution (TOPSIS)</p>
         </div>
+        @if(!$isEmpty)
         <div class="flex flex-col sm:flex-row sm:items-center gap-space-sm self-start md:self-auto">
             <div class="flex items-center gap-space-xs px-3.5 py-2 rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/20">
                 <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
                 <span class="font-label-md text-label-md text-on-surface">Uji AHP: KONSISTEN (CR = {{ number_format($metrics['cr'], 4) }})</span>
             </div>
             <div class="flex items-center gap-space-xs px-3.5 py-2 rounded-xl bg-surface-container-high text-on-surface-variant border border-outline-variant/10">
-                <span class="material-symbols-outlined text-[18px] text-primary">location_city</span>
-                <span class="font-label-md text-label-md">8 Lokasi Usulan</span>
+                <span class="material-symbols-outlined text-[18px] text-primary">analytics</span>
+                <span class="font-label-md text-label-md">{{ $metrics['total_alternatif'] }} Alternatif</span>
+            </div>
+        </div>
+        @endif
+    </div>
+
+    @if($isEmpty)
+    <!-- Empty State Banner -->
+    <div class="rounded-3xl bg-surface-container-lowest border-2 border-dashed border-outline-variant/40 p-10 md:p-16 flex flex-col items-center justify-center text-center gap-space-md">
+        <div class="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+            <span class="material-symbols-outlined text-[42px]">upload_file</span>
+        </div>
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Belum Ada Data SPK</h2>
+            <p class="font-body-md text-on-surface-variant mt-2 max-w-lg mx-auto leading-relaxed">
+                Aplikasi ini siap digunakan! Mulai dengan mengimpor data kriteria dan alternatif dari file Excel/CSV, 
+                atau muat data demo untuk mencoba fitur perhitungan AHP-TOPSIS.
+            </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-space-sm mt-2">
+            <a href="{{ route('spk.import') }}" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-label-md text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold">
+                <span class="material-symbols-outlined text-[20px]">upload_file</span>
+                <span>Import File Excel / CSV</span>
+            </a>
+            <a href="{{ route('spk.import.template') }}" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-surface-container text-on-surface font-label-md text-sm hover:bg-surface-container-high border border-outline-variant/20 transition-all font-semibold">
+                <span class="material-symbols-outlined text-[20px]">download</span>
+                <span>Unduh Template</span>
+            </a>
+            <a href="{{ route('spk.settings') }}" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary-fixed/30 text-primary font-label-md text-sm hover:bg-primary-fixed/50 transition-all font-semibold">
+                <span class="material-symbols-outlined text-[20px]">local_hospital</span>
+                <span>Muat Data Demo</span>
+            </a>
+        </div>
+        <!-- Step Guide -->
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-space-sm w-full max-w-2xl">
+            <div class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-surface-container-low">
+                <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm">1</div>
+                <span class="font-label-sm text-sm text-on-surface font-semibold">Import Data</span>
+                <span class="font-body-sm text-xs text-on-surface-variant text-center">Upload Excel/CSV dengan kriteria dan alternatif</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-surface-container-low">
+                <div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold text-sm">2</div>
+                <span class="font-label-sm text-sm text-on-surface font-semibold">Atur Bobot AHP</span>
+                <span class="font-body-sm text-xs text-on-surface-variant text-center">Sesuaikan matriks perbandingan kriteria</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-surface-container-low">
+                <div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold text-sm">3</div>
+                <span class="font-label-sm text-sm text-on-surface font-semibold">Lihat Keputusan</span>
+                <span class="font-body-sm text-xs text-on-surface-variant text-center">Hasil perankingan TOPSIS tersedia otomatis</span>
             </div>
         </div>
     </div>
+    @else
 
     <!-- Top KPI Grid: 5 Cards Deck -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-gutter items-stretch">
@@ -46,9 +96,9 @@
                 <p class="font-label-sm text-label-sm text-primary-fixed tracking-wide uppercase">Total Alternatif</p>
                 <div class="font-numeric-metric text-numeric-metric text-on-primary mt-0.5 tracking-tight flex items-baseline gap-1.5">
                     <span>{{ $metrics['total_alternatif'] }}</span>
-                    <span class="font-headline-sm text-headline-sm font-medium text-white/90">Lokasi Desa/Kel</span>
+                    <span class="font-headline-sm text-headline-sm font-medium text-white/90">Alternatif</span>
                 </div>
-                <p class="font-body-sm text-body-sm text-white/80 mt-1">Dievaluasi untuk 1 lokasi terpilih</p>
+                <p class="font-body-sm text-body-sm text-white/80 mt-1">Dievaluasi untuk rekomendasi terbaik</p>
             </div>
         </div>
 
@@ -65,7 +115,7 @@
             <div class="mt-space-md">
                 <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Kriteria Bobot</p>
                 <div class="font-numeric-metric text-numeric-metric text-on-surface mt-0.5 tracking-tight">{{ $metrics['total_kriteria'] }} Kriteria</div>
-                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 truncate">K1 - K6 Pembobotan AHP</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 truncate">Pembobotan metode AHP</p>
             </div>
         </div>
 
@@ -80,9 +130,15 @@
                 </span>
             </div>
             <div class="mt-space-md">
-                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Prioritas Utama</p>
-                <div class="font-numeric-metric text-numeric-metric text-secondary mt-0.5 tracking-tight text-xl">Jarak Faskes</div>
-                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 truncate">Bobot K2: 35.01%</p>
+                @php
+                    $topCriterion = $ahp['kriterias']->sortByDesc(fn($k) => $ahp['weights'][$k->kode] ?? $k->bobot)->first();
+                    $topWeight = $topCriterion ? ($ahp['weights'][$topCriterion->kode] ?? $topCriterion->bobot) : 0;
+                @endphp
+                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Kriteria Prioritas #1</p>
+                <div class="font-numeric-metric text-numeric-metric text-secondary mt-0.5 tracking-tight text-xl truncate" title="{{ $topCriterion->nama ?? '-' }}">
+                    {{ $topCriterion->kode ?? '-' }}: {{ $topCriterion->nama ?? '-' }}
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 truncate">Bobot: {{ number_format($topWeight * 100, 2) }}%</p>
             </div>
         </div>
 
@@ -97,7 +153,7 @@
                 </span>
             </div>
             <div class="mt-space-md">
-                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Lokasi Rekomendasi #1</p>
+                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Alternatif Rekomendasi #1</p>
                 <div class="font-numeric-metric text-numeric-metric text-primary mt-0.5 tracking-tight">
                     {{ $ranked[0]['kode'] ?? '-' }} ({{ isset($ranked[0]) ? round($ranked[0]['vi'] * 100, 2) . '%' : '-' }})
                 </div>
@@ -148,7 +204,7 @@
                         <span class="font-label-sm text-label-sm text-on-surface-variant">Skor TOPSIS</span>
                     </div>
                 </div>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">Perbandingan nilai Vi dari 8 alternatif lokasi desa</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Perbandingan nilai Vi dari seluruh alternatif</p>
             </div>
 
             <!-- Bar Chart of 8 Alternatives -->
@@ -250,28 +306,6 @@
             </a>
         </div>
     </div>
-
-    <!-- Profil Tim & Studi Kasus Banner -->
-    <div class="rounded-2xl bg-surface-container-low p-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-md shadow-sm border border-outline-variant/10">
-        <div class="flex items-center gap-space-md">
-            <div class="w-10 h-10 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm border border-outline-variant/10">
-                <span class="material-symbols-outlined text-[20px]">groups</span>
-            </div>
-            <div>
-                <h4 class="font-label-lg text-label-lg text-on-surface font-bold">Kelompok 6 - Soal 6: Dinas Kesehatan (Lokasi Pembangunan Puskesmas)</h4>
-                <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">
-                    Anggota: Darel Prasetya Fawwaz, Dinathan Fahrezi, Muhammad Romadhoni Alfatih, Rizky Yunia, Nurhidayah
-                </p>
-            </div>
-        </div>
-        <div class="flex items-center gap-2 shrink-0">
-            <a href="{{ route('spk.kriteria') }}" class="px-4 py-2 rounded-xl bg-surface-container-lowest hover:bg-white text-on-surface font-label-md text-label-md transition-all shadow-sm border border-outline-variant/20">
-                Matriks AHP
-            </a>
-            <a href="{{ route('spk.keputusan') }}" class="px-4 py-2 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md transition-all shadow-md shadow-primary/20">
-                Hasil TOPSIS
-            </a>
-        </div>
-    </div>
+    @endif
 </div>
 @endsection

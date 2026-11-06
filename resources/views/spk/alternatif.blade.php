@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Alternatif & Matriks Keputusan - SPK Puskesmas')
+@section('title', 'Alternatif & Matriks Keputusan - Sistem Pendukung Keputusan')
 @section('page_title', 'Alternatif & Matriks Keputusan (X)')
 
 @section('content')
@@ -12,10 +12,9 @@
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
                     Tahap 2: Dataset Matriks Keputusan (X)
                 </span>
-                <span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide uppercase">Dinas Kesehatan Kabupaten</span>
             </div>
             <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Matriks Keputusan Awal Alternatif</h1>
-            <p class="font-body-md text-on-surface-variant mt-0.5">Kelola alternatif lokasi dan nilai evaluasi terhadap seluruh kriteria sebelum normalisasi TOPSIS</p>
+            <p class="font-body-md text-on-surface-variant mt-0.5">Kelola alternatif dan nilai evaluasi terhadap seluruh kriteria sebelum normalisasi TOPSIS</p>
         </div>
         <div class="flex flex-wrap items-center gap-space-sm">
             <button type="button" onclick="openAddAltModal()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-md text-sm border border-outline-variant/20 shadow-xs transition-all font-semibold">
@@ -28,6 +27,47 @@
             </a>
         </div>
     </div>
+
+    @if($isEmpty)
+    <!-- Empty State -->
+    <div class="rounded-3xl bg-surface-container-lowest border-2 border-dashed border-outline-variant/40 p-10 md:p-14 flex flex-col items-center justify-center text-center gap-space-md">
+        <div class="w-16 h-16 rounded-3xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+            <span class="material-symbols-outlined text-[36px]">table_chart</span>
+        </div>
+        <div>
+            @if($kriterias->isEmpty())
+                <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Belum Ada Kriteria</h2>
+                <p class="font-body-md text-on-surface-variant mt-2 max-w-lg mx-auto leading-relaxed">
+                    Tambahkan kriteria terlebih dahulu sebelum memasukkan data alternatif. 
+                    Kriteria diperlukan sebagai kolom penilaian dalam matriks keputusan.
+                </p>
+            @else
+                <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Belum Ada Alternatif</h2>
+                <p class="font-body-md text-on-surface-variant mt-2 max-w-lg mx-auto leading-relaxed">
+                    Sudah ada {{ $kriterias->count() }} kriteria terdaftar. Tambahkan alternatif secara manual atau import sekaligus 
+                    melalui file Excel/CSV untuk memulai evaluasi TOPSIS.
+                </p>
+            @endif
+        </div>
+        <div class="flex flex-col sm:flex-row gap-space-sm mt-2">
+            @if($kriterias->isEmpty())
+                <a href="{{ route('spk.kriteria') }}" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-label-md text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold">
+                    <span class="material-symbols-outlined text-[20px]">tune</span>
+                    <span>Tambah Kriteria Dulu</span>
+                </a>
+            @else
+                <button type="button" onclick="openAddAltModal()" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-label-md text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold">
+                    <span class="material-symbols-outlined text-[20px]">add_location_alt</span>
+                    <span>Tambah Alternatif Manual</span>
+                </button>
+            @endif
+            <a href="{{ route('spk.import') }}" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-surface-container text-on-surface font-label-md text-sm hover:bg-surface-container-high border border-outline-variant/20 transition-all font-semibold">
+                <span class="material-symbols-outlined text-[20px]">upload_file</span>
+                <span>Import dari Excel/CSV</span>
+            </a>
+        </div>
+    </div>
+    @else
 
     @php
         $totalAlt = count($alternatifs);
@@ -46,12 +86,12 @@
                     <span class="material-symbols-outlined text-[24px]">location_on</span>
                 </span>
                 <span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
-                    {{ $totalAlt }} Lokasi
+                    {{ $totalAlt }} Alternatif
                 </span>
             </div>
             <div class="mt-space-md">
                 <div class="font-headline-lg text-headline-lg text-on-surface font-bold">{{ $totalAlt }} Alternatif</div>
-                <div class="font-label-lg text-label-lg text-on-surface-variant font-medium mt-0.5">Total Alternatif Usulan</div>
+                <div class="font-label-lg text-label-lg text-on-surface-variant font-medium mt-0.5">Total Alternatif Terdaftar</div>
                 <p class="font-body-sm text-body-sm text-outline mt-1">Dapat ditambah/dikurangi secara dinamis</p>
             </div>
         </div>
@@ -120,7 +160,7 @@
                     </div>
                     <div>
                         <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Tabel Matriks Keputusan (Alternatif X)</h2>
-                        <p class="font-body-sm text-body-sm text-outline">Anda dapat langsung mengedit nilai di dalam tabel dan menekan tombol simpan di bawah/atas.</p>
+                        <p class="font-body-sm text-body-sm text-outline">Anda dapat langsung mengedit nilai di dalam tabel dan menekan tombol simpan di bawah.</p>
                     </div>
                 </div>
 
@@ -136,14 +176,8 @@
                     </div>
                     <div class="flex items-center bg-surface-container-low rounded-xl px-space-sm py-1.5 text-on-surface-variant border border-outline-variant/20 ml-2">
                         <span class="material-symbols-outlined text-[18px]">search</span>
-                        <input type="text" id="alternatif-filter" placeholder="Cari desa/kel..." class="bg-transparent border-0 outline-none text-on-surface font-body-sm text-body-sm px-1.5 w-32 focus:w-44 transition-all"/>
+                        <input type="text" id="alternatif-filter" placeholder="Cari alternatif..." class="bg-transparent border-0 outline-none text-on-surface font-body-sm text-body-sm px-1.5 w-32 focus:w-44 transition-all"/>
                     </div>
-                    @if(count($alternatifs) > 0 && count($kriterias) > 0)
-                    <button type="submit" class="flex items-center gap-1.5 px-4 py-2 bg-primary text-on-primary rounded-xl text-xs font-bold hover:bg-primary/90 shadow-sm transition-all">
-                        <span class="material-symbols-outlined text-[18px]">save</span>
-                        <span>Simpan Nilai Matriks</span>
-                    </button>
-                    @endif
                 </div>
             </div>
 
@@ -156,7 +190,7 @@
                                 Kode
                             </th>
                             <th class="py-3.5 px-4 min-w-[200px] sticky left-14 z-20 bg-surface-container-low font-label-md text-label-md">
-                                Lokasi Usulan
+                                Nama Alternatif
                             </th>
                             @foreach($kriterias as $k)
                                 <th class="py-3.5 px-3 text-center {{ $k->tipe == 'Cost' ? 'bg-tertiary-fixed/30 text-tertiary' : 'text-primary' }}">
@@ -279,16 +313,16 @@
                 <input type="text" name="kode" placeholder="Misal: L9" required maxlength="10" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm font-mono uppercase focus:outline-primary" />
             </div>
             <div>
-                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nama Lokasi / Desa / Kelurahan</label>
-                <input type="text" name="nama" placeholder="Misal: Desa Harapan Makmur" required class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary" />
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nama Alternatif</label>
+                <input type="text" name="nama" placeholder="Misal: Alternatif A / Desa X" required class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary" />
             </div>
             <div>
-                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Kategori Wilayah</label>
-                <input type="text" name="kategori" value="Desa" placeholder="Desa / Kelurahan" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary" />
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Kategori</label>
+                <input type="text" name="kategori" value="Umum" placeholder="Misal: Wilayah A / Tipe 1" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary" />
             </div>
             <div>
-                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Deskripsi / Catatan Lokasi</label>
-                <textarea name="deskripsi" rows="2" placeholder="Catatan kondisi lokasi, akses, dsb" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary"></textarea>
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Deskripsi / Keterangan</label>
+                <textarea name="deskripsi" rows="2" placeholder="Catatan kondisi atau deskripsi alternatif" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary"></textarea>
             </div>
 
             <!-- Initial Criteria Values Input -->
@@ -334,15 +368,15 @@
                 <input type="text" name="kode" id="edit_alt_kode" required maxlength="10" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm font-mono uppercase focus:outline-primary" />
             </div>
             <div>
-                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nama Lokasi</label>
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Nama Alternatif</label>
                 <input type="text" name="nama" id="edit_alt_nama" required class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary" />
             </div>
             <div>
-                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Kategori Wilayah</label>
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Kategori</label>
                 <input type="text" name="kategori" id="edit_alt_kategori" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary" />
             </div>
             <div>
-                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Deskripsi</label>
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">Deskripsi / Keterangan</label>
                 <textarea name="deskripsi" id="edit_alt_deskripsi" rows="3" class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary"></textarea>
             </div>
             <div>
@@ -357,12 +391,66 @@
     </div>
 </div>
 
+<!-- Modal Import Alternatif CSV -->
+<div id="modalImportCsv" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-surface-container-lowest rounded-2xl max-w-lg w-full p-6 shadow-xl border border-outline-variant/20 animate-fade-in">
+        <div class="flex items-center justify-between pb-3 border-b border-outline-variant/10">
+            <h3 class="font-headline-sm text-lg font-bold text-on-surface flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary">upload_file</span>
+                Import Data Alternatif (.CSV)
+            </h3>
+            <button type="button" onclick="closeImportCsvModal()" class="text-on-surface-variant hover:text-on-surface">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <form action="{{ route('spk.alternatif.import') }}" method="POST" enctype="multipart/form-data" class="mt-4 space-y-4">
+            @csrf
+            
+            <div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/20 text-xs text-on-surface-variant space-y-2">
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-on-surface flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[16px] text-primary">info</span>
+                        Petunjuk Format CSV
+                    </span>
+                    <a href="{{ route('spk.alternatif.template') }}" class="inline-flex items-center gap-1 text-primary hover:underline font-semibold">
+                        <span class="material-symbols-outlined text-[15px]">download</span>
+                        Unduh Template CSV
+                    </a>
+                </div>
+                <p>Header file CSV harus memuat: <code class="px-1 py-0.5 rounded bg-surface-container-high font-mono text-primary font-bold">Kode,Nama,Kategori,Deskripsi</code> serta kolom kriteria (@foreach($kriterias as $k)<code class="px-1 py-0.5 rounded bg-surface-container-high font-mono text-primary font-bold">{{ $k->kode }}</code>@if(!$loop->last), @endif @endforeach).</p>
+                <p class="text-[11px] text-outline">Separator koma (<code>,</code>) maupun titik-koma (<code>;</code>) akan otomatis dikenali oleh sistem.</p>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1.5">Pilih File CSV (.csv / .txt)</label>
+                <input type="file" name="file_csv" accept=".csv,.txt" required class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm focus:outline-primary file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-primary file:text-on-primary hover:file:bg-primary/90 cursor-pointer" />
+            </div>
+
+            <div class="flex items-center justify-end gap-2 pt-3 border-t border-outline-variant/10">
+                <button type="button" onclick="closeImportCsvModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-on-surface-variant hover:bg-surface-container-high">Batal</button>
+                <button type="submit" class="px-5 py-2 bg-primary text-on-primary rounded-xl text-xs font-bold hover:bg-primary/90 shadow-sm flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px]">upload</span>
+                    <span>Unggah & Impor</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
     function openAddAltModal() {
         document.getElementById('modalAddAlternatif').classList.remove('hidden');
     }
     function closeAddAltModal() {
         document.getElementById('modalAddAlternatif').classList.add('hidden');
+    }
+
+    function openImportCsvModal() {
+        document.getElementById('modalImportCsv').classList.remove('hidden');
+    }
+    function closeImportCsvModal() {
+        document.getElementById('modalImportCsv').classList.add('hidden');
     }
 
     function openEditAltModal(alt) {
@@ -402,4 +490,5 @@
         }
     });
 </script>
+    @endif
 @endsection

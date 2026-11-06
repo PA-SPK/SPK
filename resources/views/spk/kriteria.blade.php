@@ -12,16 +12,11 @@
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
                     Tahap 1: Analytical Hierarchy Process (AHP)
                 </span>
-                <span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide uppercase">Dinas Kesehatan Kabupaten</span>
             </div>
             <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Kriteria & Matriks Bobot AHP</h1>
             <p class="font-body-md text-on-surface-variant mt-0.5">Kelola kriteria dan pembobotan berbasis Analytical Hierarchy Process (AHP) secara dinamis</p>
         </div>
         <div class="flex flex-wrap items-center gap-space-sm">
-            <button type="button" onclick="openAddModal()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold">
-                <span class="material-symbols-outlined text-[20px]">add_circle</span>
-                <span>Tambah Kriteria</span>
-            </button>
             <div class="px-4 py-2.5 rounded-xl {{ $ahp['is_consistent'] ? 'bg-primary-fixed/40 text-on-primary-fixed-variant border-primary/20' : 'bg-error/10 text-error border-error/20' }} font-label-md text-label-md font-semibold border flex items-center gap-2">
                 <span class="material-symbols-outlined text-[20px] {{ $ahp['is_consistent'] ? 'text-primary' : 'text-error' }}">
                     {{ $ahp['is_consistent'] ? 'verified' : 'warning' }}
@@ -30,6 +25,32 @@
             </div>
         </div>
     </div>
+
+    @if($isEmpty)
+    <!-- Empty State -->
+    <div class="rounded-3xl bg-surface-container-lowest border-2 border-dashed border-outline-variant/40 p-10 md:p-14 flex flex-col items-center justify-center text-center gap-space-md">
+        <div class="w-16 h-16 rounded-3xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+            <span class="material-symbols-outlined text-[36px]">tune</span>
+        </div>
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Belum Ada Kriteria</h2>
+            <p class="font-body-md text-on-surface-variant mt-2 max-w-lg mx-auto leading-relaxed">
+                Tambahkan kriteria secara manual menggunakan tombol di atas, atau import sekaligus melalui file Excel/CSV.
+                Kriteria digunakan sebagai parameter penilaian dalam perhitungan AHP-TOPSIS.
+            </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-space-sm mt-2">
+            <button type="button" onclick="openAddModal()" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-label-md text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold">
+                <span class="material-symbols-outlined text-[20px]">add_circle</span>
+                <span>Tambah Kriteria Manual</span>
+            </button>
+            <a href="{{ route('spk.import') }}" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-surface-container text-on-surface font-label-md text-sm hover:bg-surface-container-high border border-outline-variant/20 transition-all font-semibold">
+                <span class="material-symbols-outlined text-[20px]">upload_file</span>
+                <span>Import dari Excel/CSV</span>
+            </a>
+        </div>
+    </div>
+    @else
 
     @php
         $benefitCriteria = $kriterias->where('tipe', 'Benefit');
@@ -213,17 +234,9 @@
             <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm border border-outline-variant/10">
                 <form action="{{ route('spk.kriteria.perbandingan') }}" method="POST">
                     @csrf
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-md">
-                        <div>
-                            <h2 class="font-headline-md text-headline-md text-on-surface font-bold">Matriks Perbandingan Berpasangan (Pairwise Matrix)</h2>
-                            <p class="font-body-sm text-body-sm text-on-surface-variant">Ubah nilai perbandingan antar kriteria (skala 1-9 atau pecahan). Sisi kebalikan akan otomatis terhitung (a<sub>ji</sub> = 1 / a<sub>ij</sub>).</p>
-                        </div>
-                        @if(count($kriterias) > 1)
-                        <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-xl font-label-md text-xs font-bold hover:bg-primary/90 shadow-sm transition-all">
-                            <span class="material-symbols-outlined text-[18px]">save</span>
-                            <span>Simpan & Hitung AHP</span>
-                        </button>
-                        @endif
+                    <div class="mb-space-md">
+                        <h2 class="font-headline-md text-headline-md text-on-surface font-bold">Matriks Perbandingan Berpasangan (Pairwise Matrix)</h2>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">Ubah nilai perbandingan antar kriteria (skala 1-9 atau pecahan). Sisi kebalikan akan otomatis terhitung (a<sub>ji</sub> = 1 / a<sub>ij</sub>).</p>
                     </div>
 
                     <div class="overflow-x-auto w-full">
@@ -554,4 +567,5 @@
         }
     }
 </script>
+    @endif
 @endsection

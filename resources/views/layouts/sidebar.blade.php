@@ -41,11 +41,22 @@
                 <span class="material-symbols-outlined text-[24px]">military_tech</span>
                 <span class="font-label-sm text-[10px] mt-0.5 tracking-tight">Keputusan</span>
             </a>
+
+            <!-- Import Data -->
+            <a href="{{ route('spk.import') }}" 
+               class="flex flex-col items-center justify-center w-14 h-14 rounded-2xl transition-all group {{ request()->routeIs('spk.import*') ? 'bg-primary text-on-primary shadow-[0_8px_16px_-4px_rgba(0,105,72,0.3)] font-semibold' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' }}" 
+               title="Import Data Excel / CSV">
+                <span class="material-symbols-outlined text-[24px]">upload_file</span>
+                <span class="font-label-sm text-[10px] mt-0.5 tracking-tight">Import</span>
+            </a>
         </nav>
     </div>
 
-    <!-- Bottom Indicator -->
-    <div class="flex flex-col items-center gap-1 w-full text-on-surface-variant/40">
-        <span class="text-[9px] font-mono font-bold">SPK</span>
-    </div>
+    <!-- Bottom: Settings Icon -->
+    <a href="{{ route('spk.settings') }}" 
+       class="flex flex-col items-center gap-1 w-full text-on-surface-variant/40 hover:text-on-surface-variant transition-colors {{ request()->routeIs('spk.settings') ? 'text-primary' : '' }}" 
+       title="Pengaturan Aplikasi">
+        <span class="material-symbols-outlined text-[20px]">settings</span>
+        <span class="text-[9px] font-mono font-bold">Setting</span>
+    </a>
 </aside>

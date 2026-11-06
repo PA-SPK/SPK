@@ -2,21 +2,19 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
+     * Production default: empty — data is loaded via the Import feature.
+     * To seed the Puskesmas case study data, run: php artisan db:seed --class=SPKDataSeeder
      */
     public function run(): void
     {
-        $this->call([
-            SPKDataSeeder::class,
-        ]);
+        // No default seed — the app starts empty.
+        // Users import their own data via the Excel/CSV import feature.
     }
 }
+

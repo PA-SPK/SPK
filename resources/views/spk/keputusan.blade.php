@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Hasil & Rekomendasi Keputusan - SPK Puskesmas')
+@section('title', 'Hasil & Rekomendasi Keputusan - Sistem Pendukung Keputusan')
 @section('page_title', 'Hasil & Rekomendasi Keputusan TOPSIS')
 
 @section('content')
@@ -12,15 +12,18 @@
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
                     Tahap 3: Keputusan Final TOPSIS
                 </span>
-                <span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide uppercase">Dinas Kesehatan Kabupaten (Kelompok 6)</span>
             </div>
-            <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Hasil Evaluasi & Rekomendasi Lokasi Puskesmas</h1>
-            <p class="font-body-md text-on-surface-variant mt-0.5">Penetapan rekomendasi lokasi pembangunan Puskesmas Rawat Inap Baru berdasarkan ranking kedekatan relatif (Vi)</p>
+            <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Hasil Evaluasi & Rekomendasi Keputusan</h1>
+            <p class="font-body-md text-on-surface-variant mt-0.5">Penetapan rekomendasi alternatif terbaik berdasarkan perankingan nilai kedekatan relatif TOPSIS (Vi)</p>
         </div>
         <div class="flex flex-wrap items-center gap-space-sm">
             <a href="{{ route('spk.alternatif') }}" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-high text-on-surface font-label-md text-sm border border-outline-variant/20 hover:bg-surface-container-highest transition-all font-semibold">
                 <span class="material-symbols-outlined text-[18px]">edit_note</span>
                 <span>Ubah Data Matriks</span>
+            </a>
+            <a href="{{ route('spk.keputusan.export') }}" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-high text-on-surface font-label-md text-sm border border-outline-variant/20 hover:bg-surface-container-highest transition-all font-semibold" title="Unduh hasil perankingan dan skor TOPSIS ke file CSV">
+                <span class="material-symbols-outlined text-[18px] text-primary">download</span>
+                <span>Export CSV</span>
             </a>
             <button type="button" onclick="window.print()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold">
                 <span class="material-symbols-outlined text-[20px]">print</span>
@@ -28,6 +31,43 @@
             </button>
         </div>
     </div>
+
+    @if($isEmpty)
+    <!-- Empty State -->
+    <div class="rounded-3xl bg-surface-container-lowest border-2 border-dashed border-outline-variant/40 p-10 md:p-14 flex flex-col items-center justify-center text-center gap-space-md">
+        <div class="w-16 h-16 rounded-3xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+            <span class="material-symbols-outlined text-[36px]">military_tech</span>
+        </div>
+        <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Belum Ada Hasil Keputusan</h2>
+            <p class="font-body-md text-on-surface-variant mt-2 max-w-lg mx-auto leading-relaxed">
+                Hasil perankingan TOPSIS akan muncul di sini setelah Anda mengisi data kriteria dan alternatif, 
+                serta mengatur bobot AHP. Ikuti langkah-langkah berikut:
+            </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm mt-2 w-full max-w-2xl">
+            <a href="{{ route('spk.import') }}" class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-primary/10 hover:bg-primary/20 transition-colors group">
+                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm">1</div>
+                <span class="font-label-sm text-sm text-on-surface font-semibold group-hover:text-primary">Import Data</span>
+                <span class="font-body-sm text-xs text-on-surface-variant text-center">Upload Excel/CSV kriteria dan alternatif</span>
+            </a>
+            <a href="{{ route('spk.kriteria') }}" class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-colors group">
+                <div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold text-sm">2</div>
+                <span class="font-label-sm text-sm text-on-surface font-semibold group-hover:text-primary">Atur Bobot AHP</span>
+                <span class="font-body-sm text-xs text-on-surface-variant text-center">Sesuaikan matriks perbandingan kriteria</span>
+            </a>
+            <div class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-surface-container-low">
+                <div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold text-sm">3</div>
+                <span class="font-label-sm text-sm text-on-surface font-semibold">Lihat Hasil</span>
+                <span class="font-body-sm text-xs text-on-surface-variant text-center">Perankingan TOPSIS tampil otomatis di sini</span>
+            </div>
+        </div>
+        <a href="{{ route('spk.import') }}" class="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-label-md text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold mt-2">
+            <span class="material-symbols-outlined text-[20px]">upload_file</span>
+            <span>Mulai dengan Import Data</span>
+        </a>
+    </div>
+    @else
 
     @if(count($ranked) > 0)
     <!-- Top 3 Podium Winners Grid -->
@@ -93,7 +133,7 @@
                             #1
                         </div>
                         <span class="px-space-sm py-0.5 rounded-full bg-on-primary/20 text-on-primary font-label-sm text-label-sm uppercase tracking-wider backdrop-blur-sm font-bold">
-                            LOKASI TERBAIK
+                            ALTERNATIF TERBAIK
                         </span>
                     </div>
                     <span class="px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm">
@@ -221,7 +261,7 @@
                 </div>
                 <div class="flex items-center gap-space-xs px-space-xs">
                     <div class="relative">
-                        <input class="bg-surface-container-low text-on-surface rounded-xl pl-8 pr-3 py-1.5 font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest transition-colors w-48 border border-outline-variant/20" id="search-candidate" placeholder="Cari desa / kode..." type="text"/>
+                        <input class="bg-surface-container-low text-on-surface rounded-xl pl-8 pr-3 py-1.5 font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest transition-colors w-48 border border-outline-variant/20" id="search-candidate" placeholder="Cari alternatif / kode..." type="text"/>
                         <span class="material-symbols-outlined text-outline absolute left-2 top-2 text-[16px]">search</span>
                     </div>
                 </div>
@@ -231,11 +271,11 @@
             <div class="tab-content bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10 overflow-hidden" id="tab-ranking">
                 <div class="p-space-md flex items-center justify-between bg-surface-container-low/50 border-b border-outline-variant/10">
                     <div>
-                        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Peringkat Kelayakan Alternatif Lokasi</h3>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Peringkat Kelayakan Alternatif</h3>
                         <p class="font-body-sm text-body-sm text-on-surface-variant">Diurutkan berdasarkan rumus kedekatan relatif TOPSIS: V<sub>i</sub> = D<sub>i</sub><sup>-</sup> / (D<sub>i</sub><sup>+</sup> + D<sub>i</sub><sup>-</sup>)</p>
                     </div>
                     <span class="font-label-sm text-label-sm bg-primary/10 text-primary px-space-sm py-1 rounded-full font-semibold">
-                        {{ count($ranked) }} Lokasi Dievaluasi
+                        {{ count($ranked) }} Alternatif Dievaluasi
                     </span>
                 </div>
                 <div class="overflow-x-auto">
@@ -244,7 +284,7 @@
                             <tr class="bg-surface-container text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
                                 <th class="py-space-sm px-space-md text-center">Rank</th>
                                 <th class="py-space-sm px-space-md">Kode</th>
-                                <th class="py-space-sm px-space-md">Lokasi Usulan</th>
+                                <th class="py-space-sm px-space-md">Nama Alternatif</th>
                                 <th class="py-space-sm px-space-md text-center font-mono">D+</th>
                                 <th class="py-space-sm px-space-md text-center font-mono">D-</th>
                                 <th class="py-space-sm px-space-md text-right">Skor (V<sub>i</sub>)</th>
@@ -343,7 +383,7 @@
                         <thead>
                             <tr class="bg-surface-container-low text-on-surface-variant font-sans font-bold">
                                 <th class="py-2.5 px-3 text-left">Kode</th>
-                                <th class="py-2.5 px-3 text-left">Lokasi</th>
+                                <th class="py-2.5 px-3 text-left">Alternatif</th>
                                 @foreach($topsis['kriterias'] as $k)
                                     <th class="py-2.5 px-3 text-primary">{{ $k->kode }}</th>
                                 @endforeach
@@ -381,7 +421,7 @@
                 </div>
                 @if($podium['juara'])
                 <div class="p-space-md bg-primary-fixed/20 rounded-xl space-y-2 border border-primary/20">
-                    <div class="text-xs text-on-surface-variant font-medium">Rekomendasi 1 Lokasi Terpilih:</div>
+                    <div class="text-xs text-on-surface-variant font-medium">Alternatif Peringkat #1 Terpilih:</div>
                     <div class="font-headline-md text-lg text-primary font-bold">{{ $podium['juara']['kode'] }} - {{ $podium['juara']['alternatif']->nama }}</div>
                     <div class="text-xs text-on-surface space-y-1 pt-1 border-t border-primary/20">
                         <div class="flex justify-between">
@@ -404,7 +444,7 @@
                 </div>
                 <div class="mt-space-md">
                     <p class="text-xs text-on-surface-variant leading-relaxed">
-                        Lokasi <strong>{{ $podium['juara']['alternatif']->nama }} ({{ $podium['juara']['kode'] }})</strong> terpilih sebagai prioritas tertinggi pembangunan Puskesmas Rawat Inap Baru dengan nilai kedekatan relatif <strong>{{ number_format($podium['juara']['vi'], 4) }}</strong> terhadap solusi ideal positif (A+) dan negatif (A-).
+                        Alternatif <strong>{{ $podium['juara']['alternatif']->nama }} ({{ $podium['juara']['kode'] }})</strong> terpilih sebagai prioritas rekomendasi tertinggi dengan nilai kedekatan relatif <strong>{{ number_format($podium['juara']['vi'], 4) }}</strong> terhadap solusi ideal positif (A+) dan negatif (A-).
                     </p>
                 </div>
                 @else
@@ -414,20 +454,16 @@
                 @endif
             </div>
 
-            <!-- Profil Tim Kelompok 6 -->
+            <!-- Navigasi & Tindakan Lanjut -->
             <div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm border border-outline-variant/10">
                 <div class="flex items-center gap-2 text-primary mb-2">
-                    <span class="material-symbols-outlined text-[20px]">group</span>
-                    <h4 class="font-label-lg text-on-surface font-bold">Tim Penyusun Kelompok 6</h4>
+                    <span class="material-symbols-outlined text-[20px]">analytics</span>
+                    <h4 class="font-label-lg text-on-surface font-bold">Ringkasan Metode SPK</h4>
                 </div>
-                <ul class="text-xs text-on-surface-variant space-y-1.5 font-mono">
-                    <li>&bull; Darel Prasetya Fawwaz (2409116064)</li>
-                    <li>&bull; Dinathan Fahrezi (2409116050)</li>
-                    <li>&bull; Muhammad Romadhoni Alfatih (2409116104)</li>
-                    <li>&bull; Rizky Yunia (2409116089)</li>
-                    <li>&bull; Nurhidayah (2409116002)</li>
-                </ul>
-                <div class="mt-space-md pt-space-sm border-t border-outline-variant/10">
+                <p class="text-xs text-on-surface-variant leading-relaxed mb-space-md">
+                    Pembobotan kriteria dihitung menggunakan <strong>AHP</strong> (Analytical Hierarchy Process), dan perankingan akhir ditentukan oleh jarak relatif terhadap solusi ideal positif & negatif menggunakan <strong>TOPSIS</strong>.
+                </p>
+                <div class="pt-space-sm border-t border-outline-variant/10">
                     <a href="{{ route('spk.dashboard') }}" class="w-full py-2.5 rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-xs font-semibold transition-all flex items-center justify-center gap-2">
                         <span class="material-symbols-outlined text-[16px]">home</span>
                         <span>Kembali ke Beranda SPK</span>
@@ -478,4 +514,5 @@
         }
     });
 </script>
+    @endif
 @endsection
