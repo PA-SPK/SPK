@@ -84,7 +84,7 @@ class SPKController extends Controller
         $divisors    = $topsis['divisors'];
         $isEmpty     = $kriterias->isEmpty() || $alternatifs->isEmpty();
 
-        return view('spk.alternatif', compact('kriterias', 'alternatifs', 'matrixX', 'divisors', 'isEmpty', 'activeMethod', 'methodInfo'));
+        return view('spk.alternatif', compact('kriterias', 'alternatifs', 'matrixX', 'divisors', 'topsis', 'isEmpty', 'activeMethod', 'methodInfo'));
     }
 
     /**

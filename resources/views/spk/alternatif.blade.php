@@ -292,6 +292,257 @@
             </div>
         </form>
     </div>
+
+    <!-- ==================== TAHAPAN LENGKAP METODE TOPSIS ==================== -->
+    <div class="flex flex-col gap-space-lg pt-space-sm" id="langkah-topsis">
+        <!-- Section Header -->
+        <div class="rounded-2xl bg-gradient-to-r from-primary-fixed/40 via-surface-container-lowest to-surface-container-lowest p-space-lg border border-primary/20 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+            <div class="flex items-start gap-space-md">
+                <div class="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-md">
+                    <span class="material-symbols-outlined text-[28px]">military_tech</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-xs font-bold uppercase tracking-wider">
+                            Langkah Perhitungan Lengkap
+                        </span>
+                        <span class="font-body-sm text-xs text-on-surface-variant font-medium">
+                            Metode TOPSIS (Technique for Order Preference by Similarity to Ideal Solution)
+                        </span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
+                        Tahapan Normalisasi & Evaluasi TOPSIS
+                    </h2>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                        Berikut adalah tahapan matematis lengkap perhitungan TOPSIS berdasarkan Matriks Keputusan (X) dan Bobot Prioritas AHP.
+                    </p>
+                </div>
+            </div>
+            <a href="{{ route('spk.keputusan') }}" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold shrink-0 self-start md:self-auto">
+                <span>Buka Detail Keputusan Final</span>
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+        </div>
+
+        @if(isset($topsis['matrix_r']) && count($topsis['matrix_r']) > 0)
+        <!-- LANGKAH 1: MATRIKS TERNORMALISASI (R) -->
+        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10 overflow-hidden">
+            <div class="p-space-lg border-b border-outline-variant/10 flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container-low/30">
+                <div class="flex items-center gap-space-sm">
+                    <span class="w-8 h-8 rounded-xl bg-primary-fixed text-primary flex items-center justify-center font-bold text-sm shrink-0">
+                        1
+                    </span>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+                            Matriks Keputusan Ternormalisasi (R)
+                        </h3>
+                        <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">
+                            Menghitung nilai <span class="font-mono font-bold text-primary">r<sub>ij</sub></span> dengan membagi elemen matriks <span class="font-mono font-bold">x<sub>ij</sub></span> terhadap akar jumlah kuadrat kriteria.
+                        </p>
+                    </div>
+                </div>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container font-mono text-xs text-primary font-bold self-start md:self-auto">
+                    <span>Rumus: r<sub>ij</sub> = x<sub>ij</sub> / &radic;&Sigma; x<sub>kj</sub>&sup2;</span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left border-collapse min-w-[900px]">
+                    <thead>
+                        <tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+                            <th class="py-3 px-4 w-14 sticky left-0 z-20 bg-surface-container-low text-center">Kode</th>
+                            <th class="py-3 px-4 min-w-[180px] sticky left-14 z-20 bg-surface-container-low font-label-md text-label-md">Nama Alternatif</th>
+                            @foreach($kriterias as $k)
+                                <th class="py-3 px-3 text-center {{ $k->tipe == 'Cost' ? 'bg-tertiary-fixed/20 text-tertiary' : 'text-primary' }}">
+                                    <span class="font-bold font-mono text-xs">{{ $k->kode }}</span>
+                                    <span class="block text-[10px] text-outline font-normal">({{ $k->tipe }})</span>
+                                </th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant/10 text-on-surface font-mono text-xs">
+                        @foreach($alternatifs as $alt)
+                            <tr class="hover:bg-surface-container-low/70 transition-colors">
+                                <td class="py-3 px-4 text-center font-bold text-primary sticky left-0 z-10 bg-surface-container-lowest">
+                                    {{ $alt->kode }}
+                                </td>
+                                <td class="py-3 px-4 font-sans text-on-surface font-medium sticky left-14 z-10 bg-surface-container-lowest">
+                                    {{ $alt->nama }}
+                                </td>
+                                @foreach($kriterias as $k)
+                                    @php $rVal = $topsis['matrix_r'][$alt->kode][$k->kode] ?? 0; @endphp
+                                    <td class="py-2.5 px-3 text-center {{ $k->tipe == 'Cost' ? 'bg-tertiary-fixed/5' : '' }}">
+                                        {{ number_format($rVal, 4) }}
+                                    </td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                        <!-- Row Pembagi Vektor -->
+                        <tr class="bg-surface-container font-bold text-xs text-on-surface border-t-2 border-outline-variant/20">
+                            <td class="py-3 px-4 text-center text-primary sticky left-0 z-10 bg-surface-container">&radic;&Sigma;x&sup2;</td>
+                            <td class="py-3 px-4 font-sans sticky left-14 z-10 bg-surface-container">Pembagi Euclidean (&radic;&Sigma;x<sub>ij</sub>&sup2;)</td>
+                            @foreach($kriterias as $k)
+                                <td class="py-3 px-3 text-center text-primary font-mono">
+                                    {{ number_format($divisors[$k->kode] ?? 0, 4) }}
+                                </td>
+                            @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- LANGKAH 2: MATRIKS TERNORMALISASI TERBOBOT (Y) -->
+        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10 overflow-hidden">
+            <div class="p-space-lg border-b border-outline-variant/10 flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container-low/30">
+                <div class="flex items-center gap-space-sm">
+                    <span class="w-8 h-8 rounded-xl bg-primary text-on-primary flex items-center justify-center font-bold text-sm shrink-0">
+                        2
+                    </span>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+                            Matriks Ternormalisasi Terbobot (Y)
+                        </h3>
+                        <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">
+                            Mengalikan elemen matriks ternormalisasi <span class="font-mono font-bold text-primary">r<sub>ij</sub></span> dengan bobot prioritas kriteria <span class="font-mono font-bold text-primary">w<sub>j</sub></span> dari AHP.
+                        </p>
+                    </div>
+                </div>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container font-mono text-xs text-primary font-bold self-start md:self-auto">
+                    <span>Rumus: y<sub>ij</sub> = w<sub>j</sub> &times; r<sub>ij</sub></span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left border-collapse min-w-[900px]">
+                    <thead>
+                        <!-- Row Bobot AHP -->
+                        <tr class="bg-primary-fixed/20 text-on-surface border-b border-primary/20">
+                            <th class="py-2.5 px-4 sticky left-0 z-20 bg-primary-fixed/30 text-center font-mono text-xs font-bold text-primary">W<sub>j</sub></th>
+                            <th class="py-2.5 px-4 sticky left-14 z-20 bg-primary-fixed/30 font-sans text-xs font-bold text-primary">Bobot Prioritas Kriteria (AHP)</th>
+                            @foreach($kriterias as $k)
+                                @php $w = $topsis['ahp']['weights'][$k->kode] ?? $k->bobot; @endphp
+                                <th class="py-2.5 px-3 text-center font-mono text-xs font-bold text-primary">
+                                    {{ number_format($w, 4) }}
+                                    <span class="block text-[10px] text-primary/80 font-normal">({{ number_format($w * 100, 2) }}%)</span>
+                                </th>
+                            @endforeach
+                        </tr>
+                        <tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+                            <th class="py-3 px-4 w-14 sticky left-0 z-20 bg-surface-container-low text-center">Kode</th>
+                            <th class="py-3 px-4 min-w-[180px] sticky left-14 z-20 bg-surface-container-low font-label-md text-label-md">Nama Alternatif</th>
+                            @foreach($kriterias as $k)
+                                <th class="py-3 px-3 text-center {{ $k->tipe == 'Cost' ? 'bg-tertiary-fixed/20 text-tertiary' : 'text-primary' }}">
+                                    <span class="font-bold font-mono text-xs">{{ $k->kode }}</span>
+                                    <span class="block text-[10px] text-outline font-normal">({{ $k->tipe }})</span>
+                                </th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant/10 text-on-surface font-mono text-xs">
+                        @foreach($alternatifs as $alt)
+                            <tr class="hover:bg-surface-container-low/70 transition-colors">
+                                <td class="py-3 px-4 text-center font-bold text-primary sticky left-0 z-10 bg-surface-container-lowest">
+                                    {{ $alt->kode }}
+                                </td>
+                                <td class="py-3 px-4 font-sans text-on-surface font-medium sticky left-14 z-10 bg-surface-container-lowest">
+                                    {{ $alt->nama }}
+                                </td>
+                                @foreach($kriterias as $k)
+                                    @php $yVal = $topsis['matrix_y'][$alt->kode][$k->kode] ?? 0; @endphp
+                                    <td class="py-2.5 px-3 text-center {{ $k->tipe == 'Cost' ? 'bg-tertiary-fixed/5' : '' }}">
+                                        {{ number_format($yVal, 4) }}
+                                    </td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- LANGKAH 3: SOLUSI IDEAL POSITIF (A+) & NEGATIF (A-) -->
+        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10 overflow-hidden">
+            <div class="p-space-lg border-b border-outline-variant/10 flex flex-col md:flex-row md:items-center justify-between gap-space-sm bg-surface-container-low/30">
+                <div class="flex items-center gap-space-sm">
+                    <span class="w-8 h-8 rounded-xl bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm shrink-0">
+                        3
+                    </span>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+                            Solusi Ideal Positif (A<sup>+</sup>) & Solusi Ideal Negatif (A<sup>-</sup>)
+                        </h3>
+                        <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">
+                            Menentukan nilai terbaik (A<sup>+</sup>) dan nilai terburuk (A<sup>-</sup>) berdasarkan klasifikasi Benefit / Cost tiap kriteria.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-fixed text-primary font-mono text-xs font-bold">
+                        Benefit: A<sup>+</sup>=max(y), A<sup>-</sup>=min(y)
+                    </span>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary-fixed text-tertiary font-mono text-xs font-bold">
+                        Cost: A<sup>+</sup>=min(y), A<sup>-</sup>=max(y)
+                    </span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left border-collapse min-w-[700px]">
+                    <thead>
+                        <tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+                            <th class="py-3 px-4 text-center w-14">No</th>
+                            <th class="py-3 px-4">Kriteria</th>
+                            <th class="py-3 px-4 text-center">Tipe</th>
+                            <th class="py-3 px-4 text-center">Bobot (AHP)</th>
+                            <th class="py-3 px-4 text-center font-bold text-primary">Solusi Ideal Positif (A<sup>+</sup> / y<sub>j</sub><sup>+</sup>)</th>
+                            <th class="py-3 px-4 text-center font-bold text-tertiary">Solusi Ideal Negatif (A<sup>-</sup> / y<sub>j</sub><sup>-</sup>)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant/10 text-on-surface font-body-sm text-sm">
+                        @foreach($kriterias as $k)
+                            @php
+                                $w = $topsis['ahp']['weights'][$k->kode] ?? $k->bobot;
+                                $aPlus = $topsis['ideal_positive'][$k->kode] ?? 0;
+                                $aMinus = $topsis['ideal_negative'][$k->kode] ?? 0;
+                            @endphp
+                            <tr class="hover:bg-surface-container-low/70 transition-colors">
+                                <td class="py-3 px-4 text-center font-mono text-xs text-on-surface-variant">{{ $loop->iteration }}</td>
+                                <td class="py-3 px-4">
+                                    <span class="font-mono font-bold text-primary">{{ $k->kode }}</span>: {{ $k->nama }}
+                                </td>
+                                <td class="py-3 px-4 text-center">
+                                    <span class="inline-block px-2.5 py-0.5 rounded-full {{ $k->tipe == 'Cost' ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-primary-fixed text-on-primary-fixed' }} font-label-sm text-xs font-semibold">
+                                        {{ $k->tipe }}
+                                    </span>
+                                </td>
+                                <td class="py-3 px-4 text-center font-mono text-xs">
+                                    {{ number_format($w, 4) }} ({{ number_format($w * 100, 2) }}%)
+                                </td>
+                                <td class="py-3 px-4 text-center font-mono text-sm font-bold text-primary bg-primary-fixed/10">
+                                    {{ number_format($aPlus, 4) }}
+                                </td>
+                                <td class="py-3 px-4 text-center font-mono text-sm font-bold text-tertiary bg-tertiary-fixed/10">
+                                    {{ number_format($aMinus, 4) }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="p-space-md bg-surface-container-low/50 border-t border-outline-variant/10 flex items-center justify-between flex-wrap gap-2">
+                <span class="text-xs text-on-surface-variant">
+                    Nilai Solusi Ideal Positif (A<sup>+</sup>) dan Negatif (A<sup>-</sup>) digunakan sebagai acuan perhitungan jarak Euclidean dan skor preferensi di tahap keputusan.
+                </span>
+                <a href="{{ route('spk.keputusan') }}" class="text-xs font-bold text-primary hover:text-primary-container flex items-center gap-1">
+                    <span>Buka Jarak Euclidean & Hasil Keputusan Final</span>
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+        @endif
+    </div>
 </div>
 
 <!-- Modal Tambah Alternatif -->
