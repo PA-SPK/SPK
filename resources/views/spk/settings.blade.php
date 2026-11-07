@@ -14,7 +14,7 @@
                 </span>
             </div>
             <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Pengaturan Aplikasi</h1>
-            <p class="font-body-md text-on-surface-variant mt-0.5">Kelola data, muat contoh studi kasus, dan lihat informasi sistem SPK</p>
+            <p class="font-body-md text-on-surface-variant mt-0.5">Kelola dataset, pilih metode perankingan SPK, dan reset data aplikasi</p>
         </div>
         <a href="{{ route('spk.import') }}" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold self-start">
             <span class="material-symbols-outlined text-[20px]">upload_file</span>
@@ -48,6 +48,53 @@
                     <div class="font-numeric-metric text-2xl text-on-surface font-bold">{{ $stats['perbandingan'] }}</div>
                     <span class="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Perbandingan AHP</span>
                 </div>
+            </div>
+
+            <!-- Multi-Method Selection Card -->
+            <div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm border border-outline-variant/10">
+                <div class="flex items-start gap-space-md mb-space-md">
+                    <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <span class="material-symbols-outlined text-[26px]">swap_horiz</span>
+                    </div>
+                    <div>
+                        <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Metode Perankingan SPK (Multi-Metode)</h2>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                            Pilih metode evaluasi utama yang digunakan di Dashboard dan halaman Keputusan. Bobot kriteria tetap bersumber dari matriks AHP secara konsisten.
+                        </p>
+                    </div>
+                </div>
+
+                <form method="POST" action="{{ route('spk.settings.method') }}">
+                    @csrf
+                    <div class="grid grid-cols-1 gap-space-sm mb-space-md">
+                        @foreach($methods as $key => $m)
+                        @php $isSelected = ($activeMethod === $key); @endphp
+                        <label class="method-card flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all {{ $isSelected ? 'border-primary bg-primary-fixed/20 shadow-xs' : 'border-outline-variant/20 bg-surface-container-low hover:border-outline-variant/50' }}">
+                            <input type="radio" name="method" value="{{ $key }}" {{ $isSelected ? 'checked' : '' }} class="mt-1 accent-primary" onchange="updateMethodCards(this)" />
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between gap-2 flex-wrap">
+                                    <span class="font-label-lg text-label-lg text-on-surface font-bold flex items-center gap-1.5">
+                                        <span class="material-symbols-outlined text-[18px] text-primary">{{ $m['icon'] }}</span>
+                                        {{ $m['short'] }}
+                                    </span>
+                                    @if($isSelected)
+                                    <span class="px-2 py-0.5 rounded-full bg-primary text-on-primary text-[10px] font-bold">Aktif Saat Ini</span>
+                                    @endif
+                                </div>
+                                <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">{{ $m['desc'] }}</p>
+                            </div>
+                        </label>
+                        @endforeach
+                    </div>
+
+                    <div class="flex items-center justify-between pt-space-xs border-t border-outline-variant/10">
+                        <span class="text-xs text-on-surface-variant">Metode aktif: <strong class="text-primary font-bold">{{ $methods[$activeMethod]['short'] ?? 'TOPSIS' }}</strong></span>
+                        <button type="submit" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all font-semibold">
+                            <span class="material-symbols-outlined text-[18px]">check</span>
+                            <span>Terapkan Metode Terpilih</span>
+                        </button>
+                    </div>
+                </form>
             </div>
 
             <!-- Load Demo Data -->
@@ -133,34 +180,8 @@
 
         </div>
 
-        <!-- Right Column: System Info + Quick Links -->
+        <!-- Right Column: Quick Links -->
         <div class="flex flex-col gap-space-lg">
-
-            <!-- System Info -->
-            <div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm border border-outline-variant/10">
-                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-md flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[20px] text-primary">info</span>
-                    Informasi Sistem
-                </h3>
-                <div class="flex flex-col gap-2">
-                    <div class="flex items-center justify-between py-2 border-b border-outline-variant/10">
-                        <span class="font-label-sm text-sm text-on-surface-variant">PHP Version</span>
-                        <span class="font-mono text-xs text-on-surface font-bold bg-surface-container px-2 py-0.5 rounded-lg">{{ $systemInfo['php_version'] }}</span>
-                    </div>
-                    <div class="flex items-center justify-between py-2 border-b border-outline-variant/10">
-                        <span class="font-label-sm text-sm text-on-surface-variant">Laravel</span>
-                        <span class="font-mono text-xs text-on-surface font-bold bg-surface-container px-2 py-0.5 rounded-lg">v{{ $systemInfo['laravel_version'] }}</span>
-                    </div>
-                    <div class="flex items-center justify-between py-2 border-b border-outline-variant/10">
-                        <span class="font-label-sm text-sm text-on-surface-variant">Metode SPK</span>
-                        <span class="font-mono text-xs text-primary font-bold bg-primary-fixed/30 px-2 py-0.5 rounded-lg">AHP + TOPSIS</span>
-                    </div>
-                    <div class="flex items-center justify-between py-2">
-                        <span class="font-label-sm text-sm text-on-surface-variant">Environment</span>
-                        <span class="font-mono text-xs font-bold px-2 py-0.5 rounded-lg {{ $systemInfo['env'] === 'production' ? 'bg-error/10 text-error' : 'bg-surface-container text-on-surface' }}">{{ $systemInfo['env'] }}</span>
-                    </div>
-                </div>
-            </div>
 
             <!-- Quick Links -->
             <div class="rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm border border-outline-variant/10">
@@ -194,7 +215,7 @@
                         <span class="material-symbols-outlined text-on-surface-variant text-[20px]">military_tech</span>
                         <div>
                             <div class="font-label-md text-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Lihat Hasil Keputusan</div>
-                            <div class="font-body-sm text-xs text-on-surface-variant">Perankingan akhir TOPSIS</div>
+                            <div class="font-body-sm text-xs text-on-surface-variant">Perankingan akhir multi-metode</div>
                         </div>
                     </a>
                 </div>
@@ -205,6 +226,19 @@
 </div>
 
 <script>
+function updateMethodCards(selectedRadio) {
+    document.querySelectorAll('.method-card').forEach(card => {
+        const radio = card.querySelector('input[type="radio"]');
+        if (radio && radio.checked) {
+            card.classList.add('border-primary', 'bg-primary-fixed/20', 'shadow-xs');
+            card.classList.remove('border-outline-variant/20', 'bg-surface-container-low');
+        } else {
+            card.classList.remove('border-primary', 'bg-primary-fixed/20', 'shadow-xs');
+            card.classList.add('border-outline-variant/20', 'bg-surface-container-low');
+        }
+    });
+}
+
 function confirmReset(e) {
     const confirmed = window.confirm(
         'PERHATIAN!\n\nAnda akan menghapus SEMUA data SPK secara permanen:\n' +

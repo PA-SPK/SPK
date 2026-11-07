@@ -12,10 +12,10 @@
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
                     Sistem Pendukung Keputusan
                 </span>
-                <span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide uppercase">AHP & TOPSIS</span>
+                <span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide uppercase">{{ $metrics['metode'] }}</span>
             </div>
             <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Dashboard Perhitungan SPK</h1>
-            <p class="font-body-md text-on-surface-variant mt-0.5">Pengambilan keputusan multi-kriteria menggunakan Analytical Hierarchy Process (AHP) dan Technique for Order of Preference by Similarity to Ideal Solution (TOPSIS)</p>
+            <p class="font-body-md text-on-surface-variant mt-0.5">Pengambilan keputusan multi-kriteria menggunakan pembobotan AHP dan {{ $metrics['metode_name'] }}.</p>
         </div>
         @if(!$isEmpty)
         <div class="flex flex-col sm:flex-row sm:items-center gap-space-sm self-start md:self-auto">
@@ -41,7 +41,7 @@
             <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Belum Ada Data SPK</h2>
             <p class="font-body-md text-on-surface-variant mt-2 max-w-lg mx-auto leading-relaxed">
                 Aplikasi ini siap digunakan! Mulai dengan mengimpor data kriteria dan alternatif dari file Excel/CSV, 
-                atau muat data demo untuk mencoba fitur perhitungan AHP-TOPSIS.
+                atau muat data demo untuk mencoba fitur perhitungan multi-metode SPK.
             </p>
         </div>
         <div class="flex flex-col sm:flex-row gap-space-sm mt-2">
@@ -73,7 +73,7 @@
             <div class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-surface-container-low">
                 <div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold text-sm">3</div>
                 <span class="font-label-sm text-sm text-on-surface font-semibold">Lihat Keputusan</span>
-                <span class="font-body-sm text-xs text-on-surface-variant text-center">Hasil perankingan TOPSIS tersedia otomatis</span>
+                <span class="font-body-sm text-xs text-on-surface-variant text-center">Hasil perankingan {{ $metrics['metode'] }} tersedia otomatis</span>
             </div>
         </div>
     </div>
@@ -125,8 +125,8 @@
                 <div class="w-10 h-10 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-secondary">
                     <span class="material-symbols-outlined text-[22px]">account_tree</span>
                 </div>
-                <span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold">
-                    AHP + TOPSIS
+                <span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
+                    {{ $metrics['metode'] }}
                 </span>
             </div>
             <div class="mt-space-md">
@@ -201,7 +201,7 @@
                     <h2 class="font-headline-sm text-headline-sm text-on-surface">Distribusi Nilai Preferensi (Vi)</h2>
                     <div class="flex items-center gap-2">
                         <span class="inline-block w-2.5 h-2.5 rounded-full bg-primary"></span>
-                        <span class="font-label-sm text-label-sm text-on-surface-variant">Skor TOPSIS</span>
+                        <span class="font-label-sm text-label-sm text-on-surface-variant">Skor {{ $metrics['metode'] }}</span>
                     </div>
                 </div>
                 <p class="font-body-sm text-body-sm text-on-surface-variant">Perbandingan nilai Vi dari seluruh alternatif</p>
@@ -272,7 +272,7 @@
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </a>
                 </div>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">Hasil kalkulasi kedekatan relatif TOPSIS (Vi)</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Hasil kalkulasi skor preferensi {{ $metrics['metode'] }} (Vi)</p>
             </div>
 
             <!-- Ranked List Items -->
@@ -287,7 +287,13 @@
                                 <h3 class="font-label-md text-label-md text-on-surface truncate group-hover:text-primary transition-colors font-semibold">
                                     {{ $kandidat['kode'] }} ({{ $kandidat['alternatif']->nama }})
                                 </h3>
-                                <span class="font-body-sm text-[11px] text-on-surface-variant">D+: {{ number_format($kandidat['d_plus'], 4) }} &bull; D-: {{ number_format($kandidat['d_minus'], 4) }}</span>
+                                @if(isset($kandidat['d_plus'], $kandidat['d_minus']))
+                                    <span class="font-body-sm text-[11px] text-on-surface-variant">D+: {{ number_format($kandidat['d_plus'], 4) }} &bull; D-: {{ number_format($kandidat['d_minus'], 4) }}</span>
+                                @elseif(isset($kandidat['vector_s']))
+                                    <span class="font-body-sm text-[11px] text-on-surface-variant">Vektor S: {{ number_format($kandidat['vector_s'], 4) }}</span>
+                                @else
+                                    <span class="font-body-sm text-[11px] text-on-surface-variant">Skor Normalisasi Terbobot</span>
+                                @endif
                             </div>
                         </div>
                         <div class="text-right shrink-0 ml-2">

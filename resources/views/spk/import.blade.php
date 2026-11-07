@@ -113,10 +113,10 @@
                 <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-md">Alur Penggunaan SPK</h3>
                 <ol class="space-y-3">
                     @php $steps = [
-                        ['icon' => 'upload_file', 'title' => 'Import File Excel', 'desc' => 'Muat kriteria dan alternatif dari satu file Excel (2 sheet).', 'done' => false],
-                        ['icon' => 'balance', 'title' => 'Atur Bobot AHP', 'desc' => 'Isi matriks perbandingan berpasangan untuk menghitung bobot kriteria.', 'done' => false],
+                        ['icon' => 'upload_file', 'title' => 'Import File Excel', 'desc' => 'Muat kriteria dan alternatif dari satu file Excel.', 'done' => false],
+                        ['icon' => 'balance', 'title' => 'Atur Bobot', 'desc' => 'Isi matriks perbandingan berpasangan untuk menghitung bobot kriteria.', 'done' => false],
                         ['icon' => 'table_chart', 'title' => 'Verifikasi Matriks X', 'desc' => 'Periksa dan sesuaikan nilai alternatif pada matriks keputusan.', 'done' => false],
-                        ['icon' => 'military_tech', 'title' => 'Lihat Hasil TOPSIS', 'desc' => 'Buka halaman Keputusan untuk melihat peringkat akhir dan rekomendasi.', 'done' => false],
+                        ['icon' => 'military_tech', 'title' => 'Lihat Hasil ', 'desc' => 'Buka halaman Keputusan untuk melihat peringkat akhir dan rekomendasi.', 'done' => false],
                     ]; @endphp
                     @foreach($steps as $i => $step)
                     <li class="flex items-start gap-3">

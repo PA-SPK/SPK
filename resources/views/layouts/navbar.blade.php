@@ -10,13 +10,6 @@
                     @yield('page_title', 'Dashboard')
                 </span>
             </div>
-            
-            <div class="hidden md:flex items-center gap-space-xs ml-2">
-                <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed/40 text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                    Metode: AHP & TOPSIS
-                </span>
-            </div>
         </div>
 
         <!-- Right: Real-time Live Calendar Date -->

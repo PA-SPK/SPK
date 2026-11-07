@@ -96,7 +96,6 @@ class SPKNavigationTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Pengaturan Aplikasi');
         $response->assertSee('Muat Data Demo');
-        $response->assertSee('PHP Version');
     }
 
     /**
@@ -139,5 +138,58 @@ class SPKNavigationTest extends TestCase
 
         $this->assertGreaterThan(0, Kriteria::count());
         $this->assertGreaterThan(0, Alternatif::count());
+    }
+
+    /**
+     * Test switching active SPK method in settings.
+     */
+    public function test_can_switch_active_spk_method(): void
+    {
+        $response = $this->post('/settings/method', [
+            'method' => 'saw',
+        ]);
+
+        $response->assertRedirect('/settings');
+        $response->assertSessionHas('success');
+
+        // Verify active method is updated
+        $this->assertEquals('saw', app(\App\Services\SPKCalculationService::class)->getActiveMethod());
+
+        // Verify dashboard reflects SAW
+        $dashResponse = $this->get('/');
+        $dashResponse->assertStatus(200);
+        $dashResponse->assertSee('AHP + SAW');
+
+        // Switch back to topsis
+        $this->post('/settings/method', ['method' => 'topsis']);
+    }
+
+    /**
+     * Test accessing different method views in keputusan screen.
+     */
+    public function test_can_view_different_methods_in_keputusan(): void
+    {
+        // TOPSIS view
+        $topsisRes = $this->get('/keputusan?metode=topsis');
+        $topsisRes->assertStatus(200);
+        $topsisRes->assertSee('D+');
+
+        // SAW view
+        $sawRes = $this->get('/keputusan?metode=saw');
+        $sawRes->assertStatus(200);
+        $sawRes->assertSee('SAW');
+
+        // WP view
+        $wpRes = $this->get('/keputusan?metode=wp');
+        $wpRes->assertStatus(200);
+        $wpRes->assertSee('Vektor S');
+
+        // Komparasi view
+        $komparasiRes = $this->get('/keputusan?metode=komparasi');
+        $komparasiRes->assertStatus(200);
+        $komparasiRes->assertSee('Tabel Perbandingan Ranking');
+        $komparasiRes->assertSee('Rank TOPSIS');
+        $komparasiRes->assertSee('Rank SAW');
+        $komparasiRes->assertSee('Rank WP');
     }
 }

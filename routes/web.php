@@ -47,5 +47,6 @@ Route::get('/alternatif/{any}', function () {
 
 // Settings
 Route::get('/settings', [SettingsController::class, 'index'])->name('spk.settings');
+Route::post('/settings/method', [SettingsController::class, 'updateMethod'])->name('spk.settings.method');
 Route::post('/settings/reset', [SettingsController::class, 'reset'])->name('spk.settings.reset');
 Route::post('/settings/seed', [SettingsController::class, 'seedDemo'])->name('spk.settings.seed');
